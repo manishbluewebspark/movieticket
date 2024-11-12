@@ -35,7 +35,7 @@ const MoviesList = () => {
   ];
 
   return (
-    <div className="movies-list-con">
+    <div className="movies-list-con mt-4 p-4">
       <div className="row">
         {movies.map(movie => (
         <div className="col-lg-3">

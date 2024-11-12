@@ -106,3 +106,84 @@ a {
   width: 100%;
 }
 /* Quickfilter css end */
+/* Movie Card Styles */
+/* Movie Card Styles */
+/* Movie Card Container */
+.mvc-movie-card {
+  width: 250px;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mvc-movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Image Container */
+.mvc-image-container {
+  width: 100%;
+  height: 180px;
+  position: relative;
+}
+
+.mvc-image {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Rating Bar */
+.mvc-rating-bar {
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 5px 10px;
+  color: #fff;
+  font-size: 0.85rem;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+/* Title and Genre */
+.mvc-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.mvc-genre {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Additional Info */
+.mvc-info {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+/* Synopsis Styling */
+.mvc-synopsis {
+  font-size: 0.8rem;
+  color: #777;
+  max-height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Button Styling */
+.mvc-btn-primary {
+  background-color: #ff6b6b;
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.mvc-btn-primary:hover {
+  background-color: #e65a5a;
+}
