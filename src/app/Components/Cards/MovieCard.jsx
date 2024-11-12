@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-// import { FaStar } from 'react-icons/fa'; // For a star icon in the rating
 
 const MovieCard = ({ title, rating, duration, languages, type, synopsis, imageUrl }) => {
     return (
@@ -15,7 +14,6 @@ const MovieCard = ({ title, rating, duration, languages, type, synopsis, imageUr
                     className="mvc-image rounded-top"
                 />
                 <div className="mvc-rating-bar position-absolute bottom-0 start-0 w-100 d-flex align-items-center px-2">
-                    {/* <FaStar color="red" className="me-1" /> */}
                     <span className="text-white">{rating}/10</span>
                     {/* <span className="text-white ms-2">{votes} Votes</span> */}
                 </div>
