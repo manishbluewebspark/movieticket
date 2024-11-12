@@ -40,3 +40,69 @@ a {
     color-scheme: dark;
   }
 }
+/* home page css */
+.navbar {
+  background-color: #e6e6e6;
+}
+
+.quick-filters {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.movie-card {
+  width: 100%;
+}
+
+.movie-card img {
+  width: 100%;
+  height: auto;
+}
+.image-con{
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+}
+/* Navbar css start */
+.navbar-main-con{
+  background-color: #8abcbb;
+  color:white;
+}
+.navbar-link-btn{
+  color: white !important;
+  text-decoration: none !important;
+}
+/* Navbar css end  */
+/* Quickfilter css start */
+.quick-filters-con{
+  background-color: #f9d178;
+}
+.qf-language-filter{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+.qf-date-filter{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.qf-time-filter{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.qf-type-filter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.quick-filters-row{
+  width: 100%;
+}
+/* Quickfilter css end */
