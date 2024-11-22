@@ -6,10 +6,9 @@ import MoviesList from "./Components/Lists/MoviesList";
 export default function Home() {
   return (
     <div>
-        <Navbar></Navbar>
-        <QuickFilters></QuickFilters>
-        <MoviesList></MoviesList>
-
+      <Navbar></Navbar>
+      <QuickFilters></QuickFilters>
+      <MoviesList></MoviesList>
     </div>
   );
 }
