@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFilteredMovies } from "../../store/features/movieSlice"; // Import your thunk action
 
@@ -21,6 +21,8 @@ const QuickFilters = () => {
   });
 
   const [hasMounted, setHasMounted] = useState(false); // New flag to track if the component has mounted
+  const datePickerRef = useRef(null); // Ref for the date picker
+
   useEffect(() => {
     // Update the filters when the selected city changes
     if (selectedCity) {
@@ -30,6 +32,7 @@ const QuickFilters = () => {
       }));
     }
   }, [selectedCity]);
+
   // Run the effect only if the component has mounted and filters are changed
   useEffect(() => {
     if (hasMounted) {
@@ -64,12 +67,24 @@ const QuickFilters = () => {
     return dateObj.getDate();
   };
 
+  const handleScroll = (direction) => {
+    if (datePickerRef.current) {
+      const scrollAmount = 100; // Adjust scroll speed here
+      const scrollContainer = datePickerRef.current;
+      if (direction === "left") {
+        scrollContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+      } else if (direction === "right") {
+        scrollContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <div className="quick-filters-con d-flex justify-content-around p-3 text-dark">
       <div className="row quick-filters-row">
-        <div className="col-lg-2">
+        <div className="col-lg-2 qf-col">
           <div className="qf-language-filter">
-            <label>Movies Name</label>
+            {/* <label>Movies Name</label> */}
             <input
               type="text"
               placeholder="Movies Name"
@@ -86,36 +101,44 @@ const QuickFilters = () => {
         </div>
         <div className="col-lg-3">
           <div className="qf-date-filter">
-            <span>Show Dates:</span>
-            <div>
-              {movies?.showdate?.map((date) => (
-                <button
-                  key={date}
-                  className={`btn ${
-                    filters.showdates.includes(date)
-                      ? "btn-primary"
-                      : "btn-light"
-                  } mx-1`}
-                  onClick={() => handleFilterChange("showdates", date)}
-                >
-                  {getDayFromDate(date)}
-                </button>
-              ))}
+            {/* <span>Show Dates:</span> */}
+            <div className="date-picker-container">
+              <button className="scroll-btn left" onClick={() => handleScroll("left")}>
+                &lt;
+              </button>
+              <div className="date-picker" ref={datePickerRef}>
+                {movies?.showdate?.map((date) => (
+                  <button
+                    key={date}
+                    className={`btn date-btn ${
+                      filters.showdates.includes(date) ? "btn-primary" : "btn-light"
+                    }`}
+                    onClick={() => handleFilterChange("showdates", date)}
+                  >
+                    <div className="date-box">
+                      <div className="date-day">{getDayFromDate(date)}</div>
+                      <div className="date-month">
+  {new Date(date).toLocaleString("en-US", { month: "short" })}
+</div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+              <button className="scroll-btn right" onClick={() => handleScroll("right")}>
+                &gt;
+              </button>
             </div>
           </div>
         </div>
-        <div className="col-lg-2">
+
+        <div className="col-lg-2 qf-col">
           <div className="qf-time-filter">
-            <span>Show Time:</span>
+            {/* <span>Show Time:</span> */}
             <div className="d-flex">
               {["Morning", "Afternoon", "Evening"].map((time) => (
                 <button
                   key={time}
-                  className={`btn ${
-                    filters.showtimes.includes(time)
-                      ? "btn-primary"
-                      : "btn-light"
-                  } mx-1`}
+                  className={`btn ${filters.showtimes.includes(time) ? "btn-primary" : "btn-light"} mx-1`}
                   onClick={() => handleFilterChange("showtimes", time)}
                 >
                   {time === "Morning" ? "☀️" : time === "Evening" ? "🌙" : "🌑"}
@@ -124,29 +147,30 @@ const QuickFilters = () => {
             </div>
           </div>
         </div>
-        <div className="col-lg-3">
+
+        <div className="col-lg-3 qf-col">
           <div className="qf-type-filter">
-            <span>Type of the movie:</span>
-            <div>
-              {movies?.movietype?.map((type) => (
-                <button
-                  key={type}
-                  className={`btn ${
-                    filters.movietypes.includes(type)
-                      ? "btn-primary"
-                      : "btn-light"
-                  } mx-1`}
-                  onClick={() => handleFilterChange("movietypes", type)}
-                >
-                  {type}
-                </button>
-              ))}
+            {/* <span>Type of the movie:</span> */}
+            <div className="">
+              <select
+                className="form-select"
+                onChange={(e) => handleFilterChange("movietypes", e.target.value)}
+                value={filters.movietypes[0]} // You can adjust how the value is managed based on your logic
+              >
+                <option value="">Select Movie Type</option>
+                {movies?.movietype?.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
         </div>
-        <div className="col-lg-2">
+
+        <div className="col-lg-2 qf-col">
           <div className="qf-language-filter">
-            <label>Language</label>
+            {/* <label>Language</label> */}
             <input
               type="text"
               placeholder="Language"

@@ -17,7 +17,7 @@ const MoviesList = () => {
       <div className="row">
         {moviesList?.length > 0 &&
           moviesList?.map((movie) => (
-            <div key={movie.movieid} className="col">
+            <div key={movie.movieid} className="col movie-list-col">
               <MovieCard {...movie} />
             </div>
           ))}

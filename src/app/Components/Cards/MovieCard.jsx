@@ -74,7 +74,7 @@ const MovieCard = ({
 
         {/* Book Now Button */}
         <div className="d-grid">
-          <button className="btn mvc-btn-primary">Book Now</button>
+          <button className="mvc-btn-primary">Book Now</button>
         </div>
       </div>
     </div>

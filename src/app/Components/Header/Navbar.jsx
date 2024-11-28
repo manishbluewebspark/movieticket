@@ -61,9 +61,13 @@ const Navbar = () => {
           <button className="btn btn-secondary ms-2">Search</button>
         </div>
         <div className="col-lg-3">
-          <div className="auth-buttons d-flex align-items-center justify-content-end">
-            <button className="btn btn-link navbar-link-btn">Login</button>
-            <button className="btn btn-link navbar-link-btn">Reach us</button>
+          <div className="auth-buttons d-flex align-items-center justify-content-around">
+            <div className="login-con">
+            <a className="login-btn">Login</a> / <a className="login-btn">Signup</a>
+            </div>
+            <div className="reach-us-con">
+              <a className="reach-us">Reach us</a>
+            </div>
           </div>
         </div>
       </div>

@@ -69,7 +69,7 @@ a {
   color:white;
 }
 .navbar-link-btn{
-  color: white !important;
+  color: rgb(0, 0, 0) !important;
   text-decoration: none !important;
 }
 /* Navbar css end  */
@@ -112,7 +112,8 @@ a {
 .mvc-movie-card {
   width: 250px;
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: 16px;
+  border: 1px solid #8ABCBB ;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -175,15 +176,256 @@ a {
 
 /* Button Styling */
 .mvc-btn-primary {
-  background-color: #ff6b6b;
+  background-color: #8ABCBB !important;
   color: #fff;
   border: none;
   padding: 0.5rem;
-  font-weight: bold;
+  font-weight: 700 !important;
+  font-size: 16px;
   border-radius: 8px;
   transition: background-color 0.3s ease;
+}
+.booknow-btn{
+  background-color: red;
 }
 
 .mvc-btn-primary:hover {
   background-color: #e65a5a;
 }
+.movie-list-col{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  /* border: 2px solid red ; */
+}
+.qf-date-filter-con{
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  overflow-x: scroll;
+}
+.type-of-he-movie{
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  overflow-x: scroll;
+
+}
+.login-con{
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  padding: 7px;
+
+
+}
+.login-btn{
+  text-decoration: none;
+  color: black;
+}
+.reach-us-con{
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  padding: 7px;
+}
+.reach-us{
+  text-decoration: none;
+  color: black;
+}
+.form-select {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+
+.qf-date-filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-picker-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.date-picker {
+  display: flex;
+  gap: 10px;
+  overflow: hidden; /* Hides the scrollbar */
+  width: 100%;
+}
+
+.date-btn {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  min-width: 70px;
+}
+
+.date-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.date-btn.btn-primary {
+  background-color: #6f42c1; /* purple */
+  color: white;
+}
+
+.date-btn.btn-light {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+.date-box {
+  text-align: center;
+}
+
+.date-day {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.date-month {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.scroll-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #6f42c1;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+}
+
+.scroll-btn.left {
+  left: 0;
+}
+
+.scroll-btn.right {
+  right: 0;
+}
+
+.qf-date-filter {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.qf-date-filter span {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.date-picker-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden; /* Hides the scrollbar */
+}
+
+.date-picker {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap; /* Ensures dates stay in a row */
+  width: 100%;
+}
+
+.date-btn {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  min-width: 50px;
+  height: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.date-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.date-btn.btn-primary {
+  background-color: #6f42c1; /* Purple */
+  color: white;
+}
+
+.date-btn.btn-light {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+.date-box {
+  text-align: center;
+}
+
+.date-day {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.date-month {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.scroll-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #6f42c1;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+}
+
+.scroll-btn.left {
+  left: 0;
+}
+
+.scroll-btn.right {
+  right: 0;
+}
+.date-picker-container{
+  width: 100%;
+  border: 1px solid rgb(192, 191, 191) ;
+  border-radius: 10px;
+  padding: 8px;
+}
+.qf-col{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
