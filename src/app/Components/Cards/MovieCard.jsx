@@ -58,7 +58,9 @@ const MovieCard = ({
 
       {/* Details Section */}
       <div className="p-3 text-center">
-        <h5 className="mvc-title mb-1">{moviename}</h5>
+      <div className="mvc-title-container" title={moviename}>
+  <h5 className="mvc-title mb-1">{moviename}</h5>
+</div>
         <p className="mvc-genre text-muted mb-2">{movietypes.join(", ")}</p>
         <p className="mvc-info">
           <strong>Duration:</strong> {duration}

@@ -2,6 +2,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import "../../node_modules/bootstrap/dist/css/bootstrap.css";
+import cssscript from '../../node_modules/bootstrap/dist/js/bootstrap.bundle'
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 const geistSans = localFont({
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Provider store={store}>{children}</Provider>
+        <script src={cssscript}></script>
       </body>
     </html>
   );

@@ -82,19 +82,19 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
+  padding: 8px;
 }
-.qf-date-filter{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.form-control {
+  height: 50px;
 }
+
+
 .qf-time-filter{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 8px;
 }
 .qf-type-filter{
   display: flex;
@@ -106,8 +106,8 @@ a {
   width: 100%;
 }
 /* Quickfilter css end */
-/* Movie Card Styles */
-/* Movie Card Styles */
+/* Movie Card Styles start */
+
 /* Movie Card Container */
 .mvc-movie-card {
   width: 250px;
@@ -192,6 +192,28 @@ a {
 .mvc-btn-primary:hover {
   background-color: #e65a5a;
 }
+
+.mvc-title-container {
+  max-width: 200px; /* Set a fixed or percentage width */
+  display: inline-block; /* Ensure it works with inline elements */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer; /* Optional: indicates interactivity */
+  vertical-align: top; /* Ensures alignment with other elements */
+}
+
+.mvc-title-container:hover .mvc-title {
+  white-space: normal; /* Allows text to wrap */
+  position: relative;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.8); /* Optional: Better readability */
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  max-width: none; /* Expand the full width */
+}
+
 .movie-list-col{
   display: flex;
   justify-content: center;
@@ -212,6 +234,7 @@ a {
   overflow-x: scroll;
 
 }
+/* movie card style end */
 .login-con{
   background-color: white;
   color: black;
@@ -244,23 +267,6 @@ a {
 }
 
 
-.qf-date-filter {
-  display: flex;
-  flex-direction: column;
-}
-
-.date-picker-container {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.date-picker {
-  display: flex;
-  gap: 10px;
-  overflow: hidden; /* Hides the scrollbar */
-  width: 100%;
-}
 
 .date-btn {
   border: none;
@@ -329,8 +335,12 @@ a {
 .qf-date-filter {
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  align-items: center;
+  justify-content: center;
 }
+
+
+
 
 .qf-date-filter span {
   font-weight: bold;
@@ -342,14 +352,23 @@ a {
   align-items: center;
   position: relative;
   overflow: hidden; /* Hides the scrollbar */
+  width: 100%;
+  /* border: 1px solid rgb(192, 191, 191) ; */
+  border-radius: 10px;
+  padding: 8px;
 }
+
 
 .date-picker {
   display: flex;
   gap: 10px;
   flex-wrap: nowrap; /* Ensures dates stay in a row */
   width: 100%;
+  overflow: hidden; /* Hides the scrollbar */
+  width: 100%;
 }
+
+
 
 .date-btn {
   border: none;
@@ -416,16 +435,122 @@ a {
 .scroll-btn.right {
   right: 0;
 }
-.date-picker-container{
-  width: 100%;
-  border: 1px solid rgb(192, 191, 191) ;
-  border-radius: 10px;
-  padding: 8px;
-}
+
 .qf-col{
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.movie-type-button{
+    border: none;
+    background-color: #f9d178;
+}
 
 
+
+
+.type-picker {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap; /* Ensures dates stay in a row */
+  width: 100%;
+  overflow: hidden; /* Hides the scrollbar */
+  width: 100%;
+}
+
+.qf-type-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* margin-bottom: 15px; */
+}
+
+.qf-type-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.type-picker-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  overflow: hidden; /* Hides the scrollbar */
+  width: 100%;
+  padding: 8px;
+}
+
+.type-picker {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap; /* Prevent buttons from wrapping to the next line */
+  overflow: hidden;
+  gap: 5px; /* Optional: Space between buttons */
+}
+
+.movie-type-button {
+  padding: 0px 0px;
+  white-space: nowrap;
+  min-width: 36px;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: 20px;
+  border-right: 4px solid black;
+  padding-right: 10px;
+}
+
+/* .scroll-btn {
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 20px; 
+} */
+
+/* .scroll-btn:hover {
+  background-color: #ddd;
+} */
+
+.row-content-cent{
+  justify-content: center !important;
+}
+.col-add-on{
+  flex: 0 0  !important;
+}
+/* quick filter header  css start */
+.qfh-main-con{
+  height:100%;
+  background-color: #d1d0d3;
+  width: 100%;
+  padding: 10px;
+}
+.qfh-cont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reset-btn{
+  border: none;
+  color: black;
+  background-color: white;
+  padding: 7px;
+  margin-right: 32px;
+  border-radius: 10px;
+}
+.reset-btn-con{
+  display: flex;
+  justify-content:end;
+  align-items:center;
+
+}
+.qfh-col{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+/* quick filter header  css end */
