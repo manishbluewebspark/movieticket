@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-// import "./CinemaBooking.css";
 
 const CinemaBooking = () => {
   const [selectedCinema, setSelectedCinema] = useState(null);
@@ -29,18 +28,18 @@ const CinemaBooking = () => {
   return (
     <div className="container mb-4">
       <div className="cn-cinema-booking-container">
-      {/* Map Section */}
       <div className="cn-map-section">
-        <iframe
-          title="Cinema Locations Map"
-          src="https://www.google.com/maps/embed"
-          style={{ border: 0 }}
-          allowFullScreen=""
-          loading="lazy"
-        ></iframe>
+            {typeof window !== "undefined" && (
+          <iframe
+            title="Cinema Locations Map"
+            src="https://www.google.com/maps/embed"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+          ></iframe>
+          )}
       </div>
 
-      {/* Sidebar Section */}
       <div className="cn-sidebar-section">
         <input
           type="text"

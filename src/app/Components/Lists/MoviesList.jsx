@@ -1,13 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import MovieCard from "../Cards/MovieCard";
-import img from "../../images/kalki.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 
 const MoviesList = () => {
   const [moviesList, setMoviesList] = useState([]);
   const { movies, loading, error } = useSelector((state) => state.movies);
-
   useEffect(() => {
     setMoviesList(movies?.movies);
   }, [movies]);
