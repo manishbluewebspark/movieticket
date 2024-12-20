@@ -41,9 +41,9 @@ a {
   }
 }
 /* home page css */
-.navbar {
+/* .navbar {
   background-color: #e6e6e6;
-}
+} */
 
 .quick-filters {
   background-color: #f5f5f5;
@@ -64,30 +64,55 @@ a {
   border: 1px solid black;
 }
 /* Navbar css start */
-.navbar-main-con{
+/* .navbar-main-con{
   background-color: #8abcbb;
   color:white;
 }
 .navbar-link-btn{
   color: rgb(0, 0, 0) !important;
   text-decoration: none !important;
-}
+} */
 /* Navbar css end  */
 /* Quickfilter css start */
 .quick-filters-con{
-  background-color: #f9d178;
+  background-color: #D6E1F7;
+  /* border: 2px solid black; */
+  border-radius: 16px;
+  /* height: 80px; */
+  padding: 20px 0px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 105%;
+  z-index: 999;
+
+}
+.header-sticky{
+  position: relative;
 }
 .qf-language-filter{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 8px;
 }
 .form-control {
   height: 50px;
 }
-
+.qf-search-filter input{
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #008ecc;
+  padding-bottom: 4px;
+  color: black;
+  width: 125px;
+}
+.qf-search-filter input:focus-visible{
+ outline: none;
+}
+.quick-filters-con{
+  flex-direction: column;
+} 
 
 .qf-time-filter{
   display: flex;
@@ -96,14 +121,18 @@ a {
   align-items: center;
   padding: 8px;
 }
-.qf-type-filter{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
 .quick-filters-row{
-  width: 100%;
+  /* width: 100%; */
+}
+.qf-selec-lang{
+    border: 1px solid black !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 18px !important;
+    text-align: left;
+    margin-top: 0px !important;
+    border-color:#222222B2 !important ;
+    width: 100px !important;
 }
 /* Quickfilter css end */
 /* Movie Card Styles start */
@@ -113,7 +142,7 @@ a {
   width: 250px;
   background-color: #fff;
   border-radius: 16px;
-  border: 1px solid #8ABCBB ;
+  border: 1px solid #EDEDED ;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -176,7 +205,7 @@ a {
 
 /* Button Styling */
 .mvc-btn-primary {
-  background-color: #8ABCBB !important;
+  background-color: #008ECC !important;
   color: #fff;
   border: none;
   padding: 0.5rem;
@@ -193,25 +222,29 @@ a {
   background-color: #e65a5a;
 }
 
-.mvc-title-container {
-  max-width: 200px; /* Set a fixed or percentage width */
-  display: inline-block; /* Ensure it works with inline elements */
+.mvc-title-container .mvc-title {
+  max-width: 200px; 
+  display: inline-block; 
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  cursor: pointer; /* Optional: indicates interactivity */
-  vertical-align: top; /* Ensures alignment with other elements */
+  cursor: pointer; 
+  vertical-align: top; 
 }
 
-.mvc-title-container:hover .mvc-title {
-  white-space: normal; /* Allows text to wrap */
+.mvc-title-container .mvc-title:hover {
   position: relative;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.8); /* Optional: Better readability */
-  color: #fff;
-  padding: 5px;
-  border-radius: 5px;
-  max-width: none; /* Expand the full width */
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    max-width: none;
+    overflow: visible;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    vertical-align: top;
+    white-space: normal;
 }
 
 .movie-list-col{
@@ -274,8 +307,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 15px;
-  border-radius: 4px;
   cursor: pointer;
   min-width: 70px;
 }
@@ -290,8 +321,8 @@ a {
 }
 
 .date-btn.btn-light {
-  background-color: #f8f9fa;
-  color: #6c757d;
+  /* background-color: #f8f9fa; */
+  /* color: #6c757d; */
 }
 
 .date-box {
@@ -353,9 +384,7 @@ a {
   position: relative;
   overflow: hidden; /* Hides the scrollbar */
   width: 100%;
-  /* border: 1px solid rgb(192, 191, 191) ; */
   border-radius: 10px;
-  padding: 8px;
 }
 
 
@@ -371,16 +400,14 @@ a {
 
 
 .date-btn {
-  border: none;
-  background-color: transparent;
+  background-color: transparent !important;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 15px;
-  border-radius: 4px;
+  padding: 3px 0px;
+  border-right: 4px solid black;
   cursor: pointer;
-  min-width: 50px;
-  height: 50px;
+  min-width: 33px;
   transition: background-color 0.3s ease;
 }
 
@@ -405,6 +432,7 @@ a {
 .date-day {
   font-weight: bold;
   font-size: 16px;
+  /* color: black; */
 }
 
 .date-month {
@@ -440,10 +468,34 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+.qf-clear-btn{
+  background-color: white;
+  color: #0048ff;
+  border: none;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-top: 10px;
 }
 .movie-type-button{
     border: none;
-    background-color: #f9d178;
+    background-color: transparent;
+}
+.movie-type-button {
+  padding: 3px 0px;
+  white-space: nowrap;
+  min-width: 36px;
+  flex-shrink: 0;
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+  border-right: 4px solid black;
+  padding-right: 10px;
 }
 
 
@@ -458,30 +510,27 @@ a {
   width: 100%;
 }
 
-.qf-type-filter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* margin-bottom: 15px; */
-}
+
 
 .qf-type-filter {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px;
+  flex-direction: column;
+}
+.qf-lable{
+font-size: 12px;
+font-weight: 500;
+line-height: 18px;
 }
 
 .type-picker-container {
   display: flex;
   align-items: center;
   justify-content: center;
-
   position: relative;
   overflow: hidden; /* Hides the scrollbar */
   width: 100%;
-  padding: 8px;
 }
 
 .type-picker {
@@ -493,16 +542,7 @@ a {
   gap: 5px; /* Optional: Space between buttons */
 }
 
-.movie-type-button {
-  padding: 0px 0px;
-  white-space: nowrap;
-  min-width: 36px;
-  flex-shrink: 0;
-  text-align: center;
-  font-size: 20px;
-  border-right: 4px solid black;
-  padding-right: 10px;
-}
+
 
 /* .scroll-btn {
   background: #f0f0f0;
@@ -539,7 +579,7 @@ a {
   color: black;
   background-color: white;
   padding: 7px;
-  margin-right: 32px;
+  margin-right: 25px;
   border-radius: 10px;
 }
 .reset-btn-con{
@@ -553,4 +593,627 @@ a {
   justify-content: end;
   align-items: center;
 }
+.show-time-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.show-time-buttons button{
+  border: none;
+  background-color:transparent ;
+}
+/* .show-time-section {
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+
+.show-time-label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.time-btn {
+  background-color: #fff;
+  border: 2px solid #d0e0ff;
+  border-radius: 8px;
+  padding: 4px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time-btn.active {
+  background-color: #008ECC;
+  color: #000000;
+  border-color: #008ECC;
+}
+
+.time-btn:hover {
+  background-color: #008ECC;
+  color: #000000;
+  border-color: #008ECC;
+}
+/* .movie-type-button:hover{
+  background-color: #008ECC;
+  color: #000000;
+  border-color: #008ECC;
+} */
+
+
 /* quick filter header  css end */
+/* footer css start */
+/* styles/globals.css */
+
+.footer-section {
+  /* height: 201px; */
+  background-color:#D6E1F7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.footer-logo-con{
+  margin-bottom: 40px;
+}
+.footer-left-sec{
+
+}
+.footer-right-sec{
+
+}
+.footer-row{
+}
+.footer-link {
+  text-decoration: none;
+  color: #555;
+}
+
+.footer-linkm:hover {
+  text-decoration: underline;
+  color: #007bff;
+}
+.footer-link:hover {
+  text-decoration: underline;
+  color: #007bff;
+}
+
+.footer-social a:hover {
+  background-color:#008ECC ;
+}
+
+.footer-copyright {
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 400;
+}
+.footer-link{
+  color: #008ECC;
+}
+.footer-social{
+  margin-bottom: 36px;
+}
+.footer-social a{
+   height: 36px;
+   width: 36px;
+   border: 1px solid #b8c1d4;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius:100px ;
+   gap: 36px;
+}
+.footer-social{
+  display: flex;
+}
+.footer-linkm{
+  color: #0a0a0a;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 400;
+}
+
+/* footer css end */
+/* releasetype  css start  */
+.release-type-container {
+  position: relative;
+  text-align: center;
+  /* height: 630px; */
+  color: white;
+  background-image: url(../app/images/releasetypebgimg.svg);
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay; /* Blends gradient and image */
+}
+
+.release-type-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, #0f5ae0ad 0%, #1b6392d9 100%);
+  z-index: 1; /* Ensures it's behind the content */
+}
+
+.release-type-container * {
+  position: relative;
+  z-index: 2; /* Keeps text and content above the overlay */
+}
+
+.release-type-container h2 {
+  padding-top: 40px;
+  margin-bottom: 16px;
+font-size: 40px;
+font-weight: 600;
+line-height: 48px;
+text-align: center;
+
+}
+
+.tabs {
+  /* display: flex; */
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  background: none;
+  border: 2px solid transparent;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.tab-button.active {
+  border: 1px solid white;
+  border-radius: 8px;
+  color:black;
+  background-color: white;  
+  padding: 4px 12px;
+}
+
+.movie-cards-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.movie-card {
+  background: white;
+  color: black;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 200px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.movie-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.movie-card h3 {
+  font-size: 16px;
+  margin: 10px 0 5px;
+}
+
+.book-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.book-button:hover {
+  background: #0056b3;
+}
+
+.view-all {
+  margin-top: 20px;
+  color: #ffffff;
+  cursor: pointer;
+font-size: 16px;
+font-weight: 400;
+line-height: 18px;
+
+}
+.release-type-divider{
+  border-right:1px solid red ;
+  padding-left: 20px;
+}
+
+/* releasetype css end  */
+/* navbar css start */
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar Container */
+.navbar-sec {
+  background-image: url(../app/images/releasetypebgimg.svg);
+  /* padding: 10px 20px; */
+  color: white;
+  height: 168px;
+  position: relative;
+  color: white;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay; /* Blends gradient and image */
+}
+.navbar-sec::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, #0f5ae0ad 0%, #1b6392d9 100%);
+  z-index: 1; 
+}
+.navbar-sec * {
+  position: relative;
+  z-index: 2; /* Keeps text and content above the overlay */
+}
+.navbar-con{
+  padding-top: 45px;
+}
+.navbar-right-con{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Logo Section */
+.navbar-logo h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Center Menu */
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 1rem;
+}
+
+.navbar-location {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-icon {
+  margin-left: 5px;
+  font-size: 0.8rem;
+}
+
+.navbar-signin {
+  display: flex;
+  align-items: center;
+padding: 8px;
+  cursor: pointer;
+  width: 70px;
+}
+
+.signin-icon {
+  font-size: 1rem;
+}
+
+/* Contact Us Button */
+.navbar-button button {
+  background-color: white;
+  color: #0048ff;
+  border: none;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.navbar-button button:hover {
+  background-color: #f0f0f0;
+}
+
+.location-selector {
+  position: relative;
+  width: 125px; /* Adjust width as needed */
+}
+
+/* Styling the Select Field */
+.location-selector .form-select {
+  appearance: none; /* Remove default styling for consistency */
+  background-color: #0048ff00; /* Blue background */
+  color: white; /* White text */
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: none; /* Remove border */
+  border-radius: 8px; /* Rounded corners */
+  outline: none; /* Remove focus outline */
+  cursor: pointer;
+
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  margin-top: 0px;
+}
+
+/* Dropdown Arrow Customization */
+.location-selector .form-select:focus {
+  box-shadow: 0 0 5px rgba(0, 72, 255, 0.7);
+}
+
+/* Style Dropdown Options */
+.location-selector .form-select option {
+  background-color: white; /* Background for options */
+  color: black; /* Text color */
+}
+
+/* navbar css end  */
+
+/* responsive css start */
+@media (min-width:320px) and (max-width:575px) {
+  .nav-logo img{
+    width: 80px !important;
+  }
+  .navbar-con {
+    padding-top: 20px;
+}
+.quick-filters-con{
+ top: 150%;
+}
+.home-page-con{
+  margin-top: 270px !important;
+}
+
+/* .date-picker{
+  justify-content: center;
+}
+.type-picker{
+  justify-content: center;
+} */
+}
+@media (min-width:576px) and (max-width:991px) {
+  .nav-logo img{
+    width: 80px !important;
+  }
+  .navbar-con {
+    padding-top: 20px;
+}
+.quick-filters-con{
+ top: 130%;
+}
+.home-page-con{
+  margin-top: 180px !important;
+}
+
+
+/* .date-picker{
+  justify-content: center;
+}
+.type-picker{
+  justify-content: center;
+} */
+}
+@media (min-width:768px) and (max-width:991px) {
+  .show-type-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+  }
+}
+@media (min-width:400px) and (max-width:575px) {
+  .show-type-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+  }
+  .show-date-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+/* responsive css end   */
+/* cinemabooking css start */
+/* General Container */
+.cn-cinema-booking-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Map Section */
+.cn-map-section {
+  flex: 1;
+  min-width: 50%;
+  height: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cn-map-section iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.type-picker{
+  width: 270px !important;
+}
+
+/* Sidebar Section */
+.cn-sidebar-section {
+  flex: 1 1;
+  min-width: 400px;
+  padding: 0px 20px;
+  border-radius: 10px;
+}
+
+/* Search Bar */
+.cn-search-bar {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #d0e0ff;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Cinema Card */
+.cn-cinema-card {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #d6e1f7;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cn-cinema-card h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Dates Section */
+.cn-date-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cn-date-btn {
+  background-color: #e9f0ff;
+  border: 1px solid #00000066;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: #0048ff;
+  cursor: pointer;
+}
+
+.cn-date-btn:hover {
+  background-color: #0048ff;
+  color: #fff;
+}
+
+/* Time Section */
+.cn-time-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cn-time-btn {
+  background-color: #f8f9fa;
+  border: 1px solid #00000066;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: #0048ff;
+  cursor: pointer;
+}
+
+.cn-time-btn:hover {
+  background-color: #0048ff;
+  color: #fff;
+}
+
+/* Payment Section */
+.cn-payment-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cn-payment-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cn-payment-btn.cn-bookmyshow {
+  background-color: #ff5722;
+  color: white;
+  border: none;
+}
+
+.cn-payment-btn.cn-paytm {
+  background-color: #0048ff;
+  color: white;
+  border: none;
+}
+
+/* Book Button */
+.cn-book-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #008ECC;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.cn-book-btn:hover {
+  background-color: #0033cc;
+}
+.home-page-con{
+  margin-top: 80px ;
+}
+
+/* cinemabooking css end  */
+
+/* .movie-type-button {
+  color: black;
+}
+
+.movie-type-button.active {
+  color: red;
+} */
+
+

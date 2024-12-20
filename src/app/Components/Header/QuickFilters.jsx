@@ -2,11 +2,23 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFilteredMovies } from "../../store/features/movieSlice"; // Import your thunk action
+import img1 from '../../images/si_sun-set-line.svg';
+import img2 from '../../images/f7_sun-max.svg';
+import img3 from '../../images/solar_moon-fog-outline.svg';
+import img4 from '../../images/solar_moon-stars-outline.svg';
+import Image from "next/image";
+import searchIcon from '../../images/serach.svg';
+import calenderIcon from '../../images/stash_data-date-solid.svg';
+import watchIcon from '../../images/mingcute_time-line.svg';
+import diceIco from '../../images/fad_random-2dice.svg';
+import tablurIcon from '../../images/tabler_language.svg';
+
 
 const QuickFilters = () => {
   const dispatch = useDispatch();
   const { movies, loading, error } = useSelector((state) => state.movies);
   const { selectedCity } = useSelector((state) => state.city);
+
 
   const [filters, setFilters] = useState({
     cityid: 0,
@@ -20,9 +32,24 @@ const QuickFilters = () => {
     areaLong: "",
   });
 
+  const clearFilters = () => {
+    setFilters({
+      cityid: selectedCity,
+      movieids: [],
+      moviesearch: "",
+      showdates: [],
+      showtimes: [],
+      movietypes: [],
+      langs: [],
+      areaLat: "",
+      areaLong: "",
+    });
+  };
+
   const [hasMounted, setHasMounted] = useState(false); // New flag to track if the component has mounted
   const datePickerRef = useRef(null); // Ref for the date picker
   const datePickerReftwo = useRef(null); // Ref for the date picker
+
 
 
   useEffect(() => {
@@ -94,34 +121,14 @@ const QuickFilters = () => {
 
   return (
     <>
-        <div className="qfh-main-con shadow">
-    <div className="row">
-        <div className="col-4">
-
-        </div>
-        <div className="col-4">
-        <div className="qfh-cont">
-            <h4>Quick Filter</h4>
-        </div>
-        </div>
-        <div className="col-4 qfh-col">
-          <div className="reset-btn-con">
-            <button className="reset-btn">
-              Clear Filter
-            </button>
-          </div>
-        </div>
-    </div>
-</div>
-    <div className="quick-filters-con d-flex justify-content-around p-3 text-dark">
-      <div className="row quick-filters-row">
-        <div className="col-lg-2">
-          <div className="qf-language-filter">
-            {/* <label>Movies Name</label> */}
+      <div className="container quick-filters-con d-flex justify-content-around text-dark">
+        <div className="row quick-filters-row">
+          <div className="col-lg-2 col-md-4 col-sm-6 qf-col">
+            <div className="qf-search-filter d-flex">
             <input
               type="text"
               placeholder="Movies Name"
-              className="form-control"
+              className=""
               value={filters.moviesearch}
               onChange={(e) =>
                 setFilters((prev) => ({
@@ -130,88 +137,117 @@ const QuickFilters = () => {
                 }))
               }
             />
+            <span><Image src={searchIcon} height={17} width={17} alt="ft-icon" ></Image></span> 
           </div>
-        </div>
-        <div className="col-lg-3">
-          <div className="qf-date-filter">
-            {/* <span>Show Dates:</span> */}
-            <div className="date-picker-container">
-              <button className="scroll-btn left" onClick={() => handleScroll("left")}>
-                {/* &lt; */}
-              </button>
-              <div className="date-picker" ref={datePickerRef}>
-                {movies?.showdate?.map((date) => (
-                  <button
-                    key={date}
-                    className={`btn date-btn ${filters.showdates.includes(date) ? "btn-primary" : "btn-light"
-                      }`}
-                    onClick={() => handleFilterChange("showdates", date)}
-                  >
-                    <div className="date-box">
-                      <div className="date-day">{getDayFromDate(date)}</div>
-                      <div className="date-month">
-                        {new Date(date).toLocaleString("en-US", { month: "short" })}
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-              <button className="scroll-btn right" onClick={() => handleScroll("right")}>
-                {/* &gt; */}
-              </button>
-            </div>
           </div>
-        </div>
-
-        <div className="col-lg-2 ">
-          <div className="qf-time-filter">
-            {/* <span>Show Time:</span> */}
-            <div className="d-flex">
-              {["Morning", "Afternoon", "Evening"].map((time) => (
-                <button
-                  key={time}
-                  className={`btn ${filters.showtimes.includes(time) ? "btn-primary" : "btn-light"} mx-1`}
-                  onClick={() => handleFilterChange("showtimes", time)}
-                >
-                  {time === "Morning" ? "☀️" : time === "Evening" ? "🌙" : "🌑"}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-3">
-          <div className="qf-type-filter">
-            {/* <span>Show Dates:</span> */}
-            <div className="type-picker-container">
-              <button className="scroll-btn left" onClick={() => handleScrolltwo("left")}>
-                {/* &lt; */}
-              </button>
-              <div className="type-picker" ref={datePickerReftwo}>
-              {movies?.movietype?.map((type) => (
-                <button
-                  key={type}
-                  className="movie-type-button"
-                  onClick={() => handleFilterChange("movietypes", type)}
-                >
-                  {type}
-                </button>
-              ))}
-              </div>
-              <button className="scroll-btn right" onClick={() => handleScrolltwo("right")}>
-                {/* &gt; */}
-              </button>
-            </div>
-          </div>
-        </div>
+          <div className="col-lg-3 col-md-4 col-sm-6 show-date-col" style={{ marginTop: "10px" }}>
+  <div className="text-center">
+    <label className="qf-lable">
+      <span>
+        <Image src={calenderIcon} height={24} width={24} alt="ft-icon" />
+      </span>
+      Show dates
+    </label>
+  </div>
+  <div className="qf-date-filter">
+    <div className="date-picker-container">
+      <button className="scroll-btn left" onClick={() => handleScroll("left")}></button>
+      <div className="date-picker" ref={datePickerRef}>
+        {movies?.showdate?.map((date) => (
+          <button
+            key={date}
+            className={`date-btn ${filters.showdates.includes(date) ? "btn-primary" : "btn-light"}`}
+            onClick={() => handleFilterChange("showdates", date)}
+            style={{
+              color: filters.showdates.includes(date) ? "#008ECC " : "black", // Dynamic text color
+            }}
+          >
+            <div className="date-day">{getDayFromDate(date)}</div>
+          </button>
+        ))}
+      </div>
+      <button className="scroll-btn right" onClick={() => handleScroll("right")}></button>
+    </div>
+  </div>
+</div>
 
 
-        <div className="col-lg-2 qf-col">
-          <div className="qf-language-filter">
-            {/* <label>Language</label> */}
-            <input
-              type="text"
-              placeholder="Language"
-              className="form-control"
+          <div className="col-lg-2 col-md-4 col-sm-6 qf-col">
+      <div className="show-time-section">
+        <div className="text-center">
+          <label className="qf-lable">
+            <span>
+              <Image src={watchIcon} height={24} width={24} alt="ft-icon" />
+            </span>
+            Show Time In
+          </label>
+        </div>
+        <div className="show-time-buttons">
+          <button
+            className={`time-btn ${filters.showtimes.includes("Morning") ? "active" : ""}`}
+            onClick={() => handleFilterChange("showtimes", "Morning")}
+          >
+            <Image src={img1} alt="icon" height={27} width={30} />
+          </button>
+          <button
+            className={`time-btn ${filters.showtimes.includes("Noon") ? "active" : ""}`}
+            onClick={() => handleFilterChange("showtimes", "Noon")}
+          >
+            <Image src={img2} alt="icon" height={24} width={24} />
+          </button>
+          <button
+            className={`time-btn ${filters.showtimes.includes("Evening") ? "active" : ""}`}
+            onClick={() => handleFilterChange("showtimes", "Evening")}
+          >
+            <Image src={img3} alt="icon" height={24} width={24} />
+          </button>
+          <button
+            className={`time-btn ${filters.showtimes.includes("Night") ? "active" : ""}`}
+            onClick={() => handleFilterChange("showtimes", "Night")}
+          >
+            <Image src={img4} alt="icon" height={24} width={24} />
+          </button>
+        </div>
+      </div>
+    </div>
+
+        <div className="col-lg-3 col-md-12 col-sm-6  show-type-col" style={{ marginTop: "10px" }}>
+  <div className="text-center">
+    <label className="qf-lable">
+      <span>
+        <Image src={diceIco} height={24} width={24} alt="ft-icon" />
+      </span>
+      Type of the movie
+    </label>
+  </div>
+  <div className="qf-type-filter">
+    <div className="type-picker-container">
+      <button className="scroll-btn left" onClick={() => handleScrolltwo("left")}></button>
+      <div className="type-picker" ref={datePickerReftwo}>
+        {movies?.movietype?.map((type) => (
+          <button
+            key={type}
+            className="movie-type-button"
+            onClick={() => handleFilterChange("movietypes", type)}
+            style={{
+              color: filters.movietypes?.includes(type) ? "#008ECC " : "black",
+            }}
+          >
+            {type}
+          </button>
+        ))}
+      </div>
+      <button className="scroll-btn right" onClick={() => handleScrolltwo("right")}></button>
+    </div>
+  </div>
+</div>
+
+          <div className="col-lg-2 col-md-12 qf-col">
+            <div className="text-center">
+            <label className="qf-lable"><span><Image src={tablurIcon} height={24} width={24} alt="ft-icon" ></Image></span>Language</label>
+            </div>
+            <select
+              className="form-select qf-selec-lang"
               value={filters.langs[0] || ""}
               onChange={(e) =>
                 setFilters((prev) => ({
@@ -219,11 +255,25 @@ const QuickFilters = () => {
                   langs: [e.target.value],
                 }))
               }
-            />
+            >
+              <option value="">Select</option>
+              <option value="English">English</option>
+              <option value="Hindi">Hindi</option>
+              <option value="Malayalam">Malayalam</option>
+              <option value="Tamil">Tamil</option>
+              <option value="Telugu">Telugu</option>
+              <option value="Kannada">Kannada</option>
+            </select>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col qf-col">
+            <button className="qf-clear-btn" onClick={clearFilters}> 
+              clear filter
+            </button>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 };

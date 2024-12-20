@@ -46,28 +46,33 @@ const MovieCard = ({
         <Image
           src={poster1 || "/placeholder.png"}
           alt={moviename}
+          // height={180}
+          // width={284}
           layout="fill"
-          objectFit="cover"
+          objectFit="fill"
           className="mvc-image rounded-top"
+          style={{width:'100%'}}
         />
-        <div className="mvc-rating-bar position-absolute bottom-0 start-0 w-100 d-flex align-items-center px-2">
+        {/* <div className="mvc-rating-bar position-absolute bottom-0 start-0 w-100 d-flex align-items-center px-2">
           <span className="text-white">{rating}/10</span>
-          {/* <span className="text-white ms-2">{votes} Votes</span> */}
-        </div>
+        </div> */}
       </div>
 
       {/* Details Section */}
       <div className="p-3 text-center">
       <div className="mvc-title-container" title={moviename}>
-  <h5 className="mvc-title mb-1">{moviename}</h5>
+  <h5 className="mvc-title mb-1">{moviename}
+  <span> ({languages.length > 1 ? "English" : languages[0]})</span>
+  </h5>
 </div>
         <p className="mvc-genre text-muted mb-2">{movietypes.join(", ")}</p>
         <p className="mvc-info">
           <strong>Duration:</strong> {duration}
         </p>
         <p className="mvc-info">
-          <strong>Languages:</strong> {languages.join(", ")}
-        </p>
+  <strong>Languages:</strong>{" "}
+  {languages.length > 0 ? languages.join(", ") : "No languages available"}
+</p>
 
         {/* Synopsis */}
         <div className="mvc-synopsis mt-2 mb-3">

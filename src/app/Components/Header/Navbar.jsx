@@ -1,42 +1,53 @@
 "use client";
+import Image from "next/image";
+import logo from '../../images/Hawlkwhite.svg';
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCities } from "../../store/features/citySlice";
 import { fetchMoviesInCity } from "../../store/features/movieSlice";
 import { setSelectedCity } from "../../store/features/citySlice"; // Import the action
+import QuickFilters from "./QuickFilters";
 
-const Navbar = () => {
-  const dispatch = useDispatch();
-  const { cities, selectedCity } = useSelector((state) => state.city); // Get selectedCity from Redux
+const Navbar= () => {
 
-  useEffect(() => {
-    dispatch(fetchCities());
-  }, [dispatch]);
-
-  useEffect(() => {
-    // Set default city if cities are available
-    if (cities.length > 0 && !selectedCity) {
-      const defaultCityId = cities[0]?.cityId; // Default to the first city in the list
-      dispatch(setSelectedCity(defaultCityId)); // Set the default city in Redux
-      dispatch(fetchMoviesInCity(defaultCityId)); // Fetch movies for the default city
-    }
-  }, [cities, selectedCity, dispatch]);
-
-  const handleCityChange = (e) => {
-    const cityId = e.target.value;
-    dispatch(setSelectedCity(cityId)); // Update the selected city in Redux
-    if (cityId) {
-      dispatch(fetchMoviesInCity(cityId)); // Fetch movies when city changes
-    }
-  };
-
+      const dispatch = useDispatch();
+      const { cities, selectedCity } = useSelector((state) => state.city); // Get selectedCity from Redux
+    
+      useEffect(() => {
+        dispatch(fetchCities());
+      }, [dispatch]);
+    
+      useEffect(() => {
+        // Set default city if cities are available
+        if (cities.length > 0 && !selectedCity) {
+          const defaultCityId = cities[0]?.cityId; // Default to the first city in the list
+          dispatch(setSelectedCity(defaultCityId)); // Set the default city in Redux
+          dispatch(fetchMoviesInCity(defaultCityId)); // Fetch movies for the default city
+        }
+      }, [cities, selectedCity, dispatch]);
+    
+      const handleCityChange = (e) => {
+        const cityId = e.target.value;
+        dispatch(setSelectedCity(cityId)); // Update the selected city in Redux
+        if (cityId) {
+          dispatch(fetchMoviesInCity(cityId)); // Fetch movies when city changes
+        }
+      };
+    
   return (
-    <div className="navbar-main-con">
-      <div className="row p-2">
-        <div className="col-lg-3">
-          <div className="d-flex justify-content-around align-items-center">
-            <h4 className="logo">HawkI</h4>
-            <div className="location-selector">
+   <>
+   <div className="header-sticky">
+   <div className="navbar-sec">
+     <div className="container navbar-con">
+        <div className="row">
+            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6 d-flex align-items-center">
+                <div className="nav-logo">
+                    <Image src={logo} alt="logo" height={32.17} width={130}></Image>
+                </div>
+            </div>
+            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6 d-flex align-items-center justify-content-end">
+               <div className="navbar-right-con">
+               <div className="location-selector">
               <select
                 className="form-select"
                 value={selectedCity}
@@ -50,28 +61,20 @@ const Navbar = () => {
                 ))}
               </select>
             </div>
-          </div>
-        </div>
-        <div className="col-lg-6 d-flex align-items-center justify-content-center">
-          <input
-            type="text"
-            placeholder="Enter your location"
-            className="form-control"
-          />
-          <button className="btn btn-secondary ms-2">Search</button>
-        </div>
-        <div className="col-lg-3">
-          <div className="auth-buttons d-flex align-items-center justify-content-around">
-            <div className="login-con">
-            <a className="login-btn">Login</a> / <a className="login-btn">Signup</a>
+                    <div className="navbar-signin">
+                    Sign In
+                    </div>
+                    <div className="navbar-button d-none d-md-block">
+                        <button>Contact Us</button>
+                    </div>
+               </div>
             </div>
-            <div className="reach-us-con">
-              <a className="reach-us">Reach us</a>
-            </div>
-          </div>
         </div>
-      </div>
+     </div>
     </div>
+    <QuickFilters></QuickFilters>
+   </div>
+   </>
   );
 };
 

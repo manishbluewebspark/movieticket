@@ -5,6 +5,10 @@ import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 import cssscript from '../../node_modules/bootstrap/dist/js/bootstrap.bundle'
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import Navbar from "./Components/Header/Navbar";
+import QuickFilters from "./Components/Header/QuickFilters";
+import ReleaseTypeComponent from "./Components/Footer/ReleaseTypeComponent";
+import Footer from "./Components/Footer/Footer";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -25,7 +29,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Provider store={store}>{children}</Provider>
+        <Provider store={store}>
+        {/* <div className="header-sticky"> */}
+      <Navbar></Navbar>
+      {/* <QuickFilters></QuickFilters> */}
+      {/* </div> */}
+          <div className="home-page-con">
+          {children}
+          </div>
+      <ReleaseTypeComponent></ReleaseTypeComponent>
+      <Footer></Footer>
+        </Provider>
         <script src={cssscript}></script>
       </body>
     </html>

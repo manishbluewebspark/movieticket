@@ -13,7 +13,8 @@ const MoviesList = () => {
   }, [movies]);
 
   return (
-    <div className="movies-list-con mt-4 p-4">
+    <div className="movies-list-con p-4">
+      <div className="container">
       <div className="row row-content-cent">
         {moviesList?.length > 0 &&
           moviesList?.map((movie) => (
@@ -21,6 +22,7 @@ const MoviesList = () => {
               <MovieCard {...movie} />
             </div>
           ))}
+      </div>
       </div>
     </div>
   );
