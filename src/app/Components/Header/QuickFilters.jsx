@@ -125,20 +125,20 @@ const QuickFilters = () => {
         <div className="row quick-filters-row">
           <div className="col-lg-2 col-md-4 col-sm-6 qf-col">
             <div className="qf-search-filter d-flex">
-            <input
-              type="text"
-              placeholder="Movies Name"
-              className=""
-              value={filters.moviesearch}
-              onChange={(e) =>
-                setFilters((prev) => ({
-                  ...prev,
-                  moviesearch: e.target.value,
-                }))
-              }
-            />
-            <span><Image src={searchIcon} height={17} width={17} alt="ft-icon" ></Image></span> 
-          </div>
+              <input
+                type="text"
+                placeholder="Movies Name"
+                className=""
+                value={filters.moviesearch}
+                onChange={(e) =>
+                  setFilters((prev) => ({
+                    ...prev,
+                    moviesearch: e.target.value,
+                  }))
+                }
+              />
+              <span><Image src={searchIcon} height={17} width={17} alt="ft-icon" ></Image></span>
+            </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-6 show-date-col" style={{ marginTop: "10px" }}>
   <div className="text-center">
@@ -151,67 +151,75 @@ const QuickFilters = () => {
   </div>
   <div className="qf-date-filter">
     <div className="date-picker-container">
-      <button className="scroll-btn left" onClick={() => handleScroll("left")}></button>
-      <div className="date-picker" ref={datePickerRef}>
-        {movies?.showdate?.map((date) => (
-          <button
-            key={date}
-            className={`date-btn ${filters.showdates.includes(date) ? "btn-primary" : "btn-light"}`}
-            onClick={() => handleFilterChange("showdates", date)}
-            style={{
-              color: filters.showdates.includes(date) ? "#008ECC " : "black", // Dynamic text color
-            }}
-          >
-            <div className="date-day">{getDayFromDate(date)}</div>
-          </button>
-        ))}
-      </div>
-      <button className="scroll-btn right" onClick={() => handleScroll("right")}></button>
+      <button className="scroll-btn left" onClick={() => handleScroll("left")}>
+        &#60;
+      </button>
+      {movies?.showdate?.length > 0 ? (
+        <div className="date-picker" ref={datePickerRef}>
+          {movies.showdate.map((date) => (
+            <button
+              key={date}
+              className={`date-btn ${
+                filters.showdates.includes(date) ? "btn-primary" : "btn-light"
+              }`}
+              onClick={() => handleFilterChange("showdates", date)}
+              style={{
+                color: filters.showdates.includes(date) ? "#008ECC" : "black", // Dynamic text color
+              }}
+            >
+              <div className="date-day">{getDayFromDate(date)}</div>
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className="no-dates-message">No dates available</div>
+      )}
+      <button className="scroll-btn right" onClick={() => handleScroll("right")}>
+        &#62;
+      </button>
     </div>
   </div>
 </div>
 
-
           <div className="col-lg-2 col-md-4 col-sm-6 qf-col">
-      <div className="show-time-section">
-        <div className="text-center">
-          <label className="qf-lable">
-            <span>
-              <Image src={watchIcon} height={24} width={24} alt="ft-icon" />
-            </span>
-            Show Time In
-          </label>
-        </div>
-        <div className="show-time-buttons">
-          <button
-            className={`time-btn ${filters.showtimes.includes("Morning") ? "active" : ""}`}
-            onClick={() => handleFilterChange("showtimes", "Morning")}
-          >
-            <Image src={img1} alt="icon" height={27} width={30} />
-          </button>
-          <button
-            className={`time-btn ${filters.showtimes.includes("Noon") ? "active" : ""}`}
-            onClick={() => handleFilterChange("showtimes", "Noon")}
-          >
-            <Image src={img2} alt="icon" height={24} width={24} />
-          </button>
-          <button
-            className={`time-btn ${filters.showtimes.includes("Evening") ? "active" : ""}`}
-            onClick={() => handleFilterChange("showtimes", "Evening")}
-          >
-            <Image src={img3} alt="icon" height={24} width={24} />
-          </button>
-          <button
-            className={`time-btn ${filters.showtimes.includes("Night") ? "active" : ""}`}
-            onClick={() => handleFilterChange("showtimes", "Night")}
-          >
-            <Image src={img4} alt="icon" height={24} width={24} />
-          </button>
-        </div>
-      </div>
-    </div>
-
-        <div className="col-lg-3 col-md-12 col-sm-6  show-type-col" style={{ marginTop: "10px" }}>
+            <div className="show-time-section">
+              <div className="text-center">
+                <label className="qf-lable">
+                  <span>
+                    <Image src={watchIcon} height={24} width={24} alt="ft-icon" />
+                  </span>
+                  Show Time In
+                </label>
+              </div>
+              <div className="show-time-buttons">
+                <button
+                  className={`time-btn ${filters.showtimes.includes("Morning") ? "active" : ""}`}
+                  onClick={() => handleFilterChange("showtimes", "Morning")}
+                >
+                  <Image src={img1} alt="icon" height={27} width={30} />
+                </button>
+                <button
+                  className={`time-btn ${filters.showtimes.includes("Noon") ? "active" : ""}`}
+                  onClick={() => handleFilterChange("showtimes", "Noon")}
+                >
+                  <Image src={img2} alt="icon" height={24} width={24} />
+                </button>
+                <button
+                  className={`time-btn ${filters.showtimes.includes("Evening") ? "active" : ""}`}
+                  onClick={() => handleFilterChange("showtimes", "Evening")}
+                >
+                  <Image src={img3} alt="icon" height={24} width={24} />
+                </button>
+                <button
+                  className={`time-btn ${filters.showtimes.includes("Night") ? "active" : ""}`}
+                  onClick={() => handleFilterChange("showtimes", "Night")}
+                >
+                  <Image src={img4} alt="icon" height={24} width={24} />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-3 col-md-12 col-sm-6 show-type-col" style={{ marginTop: "10px" }}>
   <div className="text-center">
     <label className="qf-lable">
       <span>
@@ -222,53 +230,62 @@ const QuickFilters = () => {
   </div>
   <div className="qf-type-filter">
     <div className="type-picker-container">
-      <button className="scroll-btn left" onClick={() => handleScrolltwo("left")}></button>
-      <div className="type-picker" ref={datePickerReftwo}>
-        {movies?.movietype?.map((type) => (
-          <button
-            key={type}
-            className="movie-type-button"
-            onClick={() => handleFilterChange("movietypes", type)}
-            style={{
-              color: filters.movietypes?.includes(type) ? "#008ECC " : "black",
-            }}
-          >
-            {type}
-          </button>
-        ))}
-      </div>
-      <button className="scroll-btn right" onClick={() => handleScrolltwo("right")}></button>
+      <button className="scroll-btn left" onClick={() => handleScrolltwo("left")}>
+        &#60;
+      </button>
+      {movies?.movietype?.length > 0 ? (
+        <div className="type-picker" ref={datePickerReftwo}>
+          {movies.movietype.map((type) => (
+            <button
+              key={type}
+              className="movie-type-button"
+              onClick={() => handleFilterChange("movietypes", type)}
+              style={{
+                color: filters.movietypes?.includes(type) ? "#008ECC" : "black",
+              }}
+            >
+              {type}
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className="no-types-message">No types available</div>
+      )}
+      <button className="scroll-btn right" onClick={() => handleScrolltwo("right")}>
+        &#62;
+      </button>
     </div>
   </div>
 </div>
 
           <div className="col-lg-2 col-md-12 qf-col">
             <div className="text-center">
-            <label className="qf-lable"><span><Image src={tablurIcon} height={24} width={24} alt="ft-icon" ></Image></span>Language</label>
+              <label className="qf-lable"><span><Image src={tablurIcon} height={24} width={24} alt="ft-icon" ></Image></span>Language</label>
             </div>
             <select
-              className="form-select qf-selec-lang"
-              value={filters.langs[0] || ""}
-              onChange={(e) =>
-                setFilters((prev) => ({
-                  ...prev,
-                  langs: [e.target.value],
-                }))
-              }
-            >
-              <option value="">Select</option>
-              <option value="English">English</option>
-              <option value="Hindi">Hindi</option>
-              <option value="Malayalam">Malayalam</option>
-              <option value="Tamil">Tamil</option>
-              <option value="Telugu">Telugu</option>
-              <option value="Kannada">Kannada</option>
-            </select>
+  className="form-select qf-selec-lang"
+  value={filters.langs[0] || ""}
+  onChange={(e) =>
+    setFilters((prev) => ({
+      ...prev,
+      langs: e.target.value === "" ? [] : [e.target.value],
+    }))
+  }
+>
+  <option value="">Select</option>
+  <option value="English">English</option>
+  <option value="Hindi">Hindi</option>
+  <option value="Malayalam">Malayalam</option>
+  <option value="Tamil">Tamil</option>
+  <option value="Telugu">Telugu</option>
+  <option value="Kannada">Kannada</option>
+</select>
+
           </div>
         </div>
         <div className="row">
           <div className="col qf-col">
-            <button className="qf-clear-btn" onClick={clearFilters}> 
+            <button className="qf-clear-btn" onClick={clearFilters}>
               clear filter
             </button>
           </div>

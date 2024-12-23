@@ -38,6 +38,8 @@ const MovieCard = ({
   movietypes,
   synopsis,
   poster1,
+  moviename_release_lang,
+
 }) => {
   return (
     <div className="mvc-movie-card shadow-sm">
@@ -61,8 +63,9 @@ const MovieCard = ({
       {/* Details Section */}
       <div className="p-3 text-center">
       <div className="mvc-title-container" title={moviename}>
-  <h5 className="mvc-title mb-1">{moviename}
-  <span> ({languages.length > 1 ? "English" : languages[0]})</span>
+  <h5 className="mvc-title mb-1">
+  <span>{languages.length > 1 ? moviename : `${moviename_release_lang} (${moviename})`}</span>
+
   </h5>
 </div>
         <p className="mvc-genre text-muted mb-2">{movietypes.join(", ")}</p>
