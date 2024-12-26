@@ -1,7 +1,11 @@
 "use client";
 import React, { useState } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
 const CinemaBooking = () => {
+  const { bookingStatus, loading, error } = useSelector(
+    (state) => state.cinemaBooking
+  );
+
   const [selectedCinema, setSelectedCinema] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -75,59 +79,68 @@ const CinemaBooking = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
 
-          {filteredCinemas.map((cinema, index) => (
-            <div
-              className={`cn-cinema-card ${
-                selectedCinema?.name === cinema.name ? "selected" : ""
-              }`}
-              key={index}
-              onClick={() => handleCinemaSelection(cinema)}
-            >
-              <h4>
-                {cinema.name} (Available Shows: {cinema.shows})
-              </h4>
-              <div className="cn-date-section">
-                {cinema.dates.map((date, i) => (
-                  <button
-                    className={`cn-date-btn ${
-                      selectedDate === date ? "selected" : ""
-                    }`}
-                    key={i}
-                    onClick={() => handleDateSelection(date)}
-                  >
-                    {date}
-                  </button>
-                ))}
-              </div>
-              <div className="cn-time-section">
-                {cinema.times.map((time, i) => (
-                  <button
-                    className={`cn-time-btn ${
-                      selectedTime === time ? "selected" : ""
-                    }`}
-                    key={i}
-                    onClick={() => handleTimeSelection(time)}
-                  >
-                    {time}
-                  </button>
-                ))}
-              </div>
-              <div className="cn-payment-section">
-                <button
-                  className="cn-payment-btn cn-bookmyshow"
-                  onClick={() => window.open("https://bookmyshow.com", "_blank")}
+          {bookingStatus &&
+            bookingStatus.cinemaInfo
+              ?.filter((cinema) =>
+                cinema.cinemaname
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase())
+              )
+              .map((cinema, index) => (
+                <div
+                  className={`cn-cinema-card ${
+                    selectedCinema?.name === cinema.name ? "selected" : ""
+                  }`}
+                  key={index}
+                  onClick={() => handleCinemaSelection(cinema)}
                 >
-                  BookMyShow
-                </button>
-                <button
-                  className="cn-payment-btn cn-paytm"
-                  onClick={() => window.open("https://paytm.com", "_blank")}
-                >
-                  Paytm
-                </button>
-              </div>
-            </div>
-          ))}
+                  <h4>
+                    {cinema.cinemaname} (Available Shows: {cinema.shows})
+                  </h4>
+                  <div className="cn-date-section">
+                    {bookingStatus?.showdate?.map((date, i) => (
+                      <button
+                        className={`cn-date-btn ${
+                          selectedDate === date ? "selected" : ""
+                        }`}
+                        key={i}
+                        onClick={() => handleDateSelection(date)}
+                      >
+                        {date}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="cn-time-section">
+                    {bookingStatus?.showtime?.map((time, i) => (
+                      <button
+                        className={`cn-time-btn ${
+                          selectedTime === time ? "selected" : ""
+                        }`}
+                        key={i}
+                        onClick={() => handleTimeSelection(time)}
+                      >
+                        {time}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="cn-payment-section">
+                    <button
+                      className="cn-payment-btn cn-bookmyshow"
+                      onClick={() =>
+                        window.open("https://bookmyshow.com", "_blank")
+                      }
+                    >
+                      BookMyShow
+                    </button>
+                    <button
+                      className="cn-payment-btn cn-paytm"
+                      onClick={() => window.open("https://paytm.com", "_blank")}
+                    >
+                      Paytm
+                    </button>
+                  </div>
+                </div>
+              ))}
 
           <button className="cn-book-btn" onClick={handleBooking}>
             Confirm Booking

@@ -1,7 +1,8 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchFilteredMovies } from "../../store/features/movieSlice"; // Import your thunk action
+import { fetchFilteredMovies } from "../../store/features/movieSlice";
+import {bookTickets} from "../../store/features/cinemaBookingSlice"
 import img1 from '../../images/si_sun-set-line.svg';
 import img2 from '../../images/f7_sun-max.svg';
 import img3 from '../../images/solar_moon-fog-outline.svg';
@@ -12,13 +13,21 @@ import calenderIcon from '../../images/stash_data-date-solid.svg';
 import watchIcon from '../../images/mingcute_time-line.svg';
 import diceIco from '../../images/fad_random-2dice.svg';
 import tablurIcon from '../../images/tabler_language.svg';
-
-
+import { usePathname, useSearchParams,useRouter  } from "next/navigation";
 const QuickFilters = () => {
+  const pathname = usePathname(); // Get the current route path
+  const searchParams = useSearchParams(); // Access query parameters
+  const router = useRouter();
+  let movieId = 0;
+  if(pathname === "/cinemabooking"){
+    movieId = searchParams.get("movieid");
+  }
+
+
+
   const dispatch = useDispatch();
   const { movies, loading, error } = useSelector((state) => state.movies);
   const { selectedCity } = useSelector((state) => state.city);
-
 
   const [filters, setFilters] = useState({
     cityid: 0,
@@ -51,7 +60,15 @@ const QuickFilters = () => {
   const datePickerReftwo = useRef(null); // Ref for the date picker
 
 
-
+  useEffect(() => {
+    // Update the filters when the selected city changes
+    if (movieId) {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        movieids: [movieId], // Set cityid in filters
+      }));
+    }
+  }, [movieId]);
   useEffect(() => {
     // Update the filters when the selected city changes
     if (selectedCity) {
@@ -65,12 +82,22 @@ const QuickFilters = () => {
   // Run the effect only if the component has mounted and filters are changed
   useEffect(() => {
     if (hasMounted) {
-      dispatch(fetchFilteredMovies(filters));
+      if(pathname==="/"){
+        dispatch(fetchFilteredMovies(filters));
+      }else if(pathname==="/cinemabooking"){
+        dispatch(bookTickets(filters));
+      }
     } else {
       setHasMounted(true);
     }
-  }, [filters, dispatch, hasMounted]); // Only re-run the effect if filters or hasMounted change
-
+  }, [filters, dispatch, hasMounted,pathname]); // Only re-run the effect if filters or hasMounted change
+  // useEffect(() => {
+  //   if (hasMounted) {
+  //     dispatch(bookTickets(filters));
+  //   } else {
+  //     setHasMounted(true);
+  //   }
+  // }, [filters, dispatch, hasMounted]);
   const handleFilterChange = (key, value) => {
     setFilters((prev) => {
       const updated = { ...prev };

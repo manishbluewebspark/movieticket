@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 const MovieCard = ({
+  movieid="",
   moviename = "",
   rating = "N/A",
   duration = "N/A",
@@ -18,17 +19,21 @@ const MovieCard = ({
 
   const handleBookNow = () => {
     // Use the navigate method provided by next/navigation
-    router.push(
-      `/cinemabooking?moviename=${encodeURIComponent(moviename)}&rating=${encodeURIComponent(
-        rating
-      )}&duration=${encodeURIComponent(duration)}&languages=${encodeURIComponent(
-        JSON.stringify(languages)
-      )}&movietypes=${encodeURIComponent(JSON.stringify(movietypes))}&synopsis=${encodeURIComponent(
-        synopsis
-      )}&poster1=${encodeURIComponent(poster1)}&moviename_release_lang=${encodeURIComponent(
-        moviename_release_lang
-      )}`
+    movieid
+     router.push(
+      `/cinemabooking?movieid=${encodeURIComponent(movieid)}`
     );
+    // router.push(
+    //   `/cinemabooking?moviename=${encodeURIComponent(moviename)}&rating=${encodeURIComponent(
+    //     rating
+    //   )}&duration=${encodeURIComponent(duration)}&languages=${encodeURIComponent(
+    //     JSON.stringify(languages)
+    //   )}&movietypes=${encodeURIComponent(JSON.stringify(movietypes))}&synopsis=${encodeURIComponent(
+    //     synopsis
+    //   )}&poster1=${encodeURIComponent(poster1)}&moviename_release_lang=${encodeURIComponent(
+    //     moviename_release_lang
+    //   )}`
+    // );
   };
 
   return (

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 const MoviesList = () => {
   const [moviesList, setMoviesList] = useState([]);
   const { movies, loading, error } = useSelector((state) => state.movies);
-  console.log("www", movies);
+ 
 
   useEffect(() => {
     setMoviesList(movies?.movies || []);
