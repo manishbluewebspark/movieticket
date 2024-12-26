@@ -30,7 +30,9 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Provider store={store}>
           <Navbar />
-          <div className="home-page-con">{children}</div>
+          <div className="home-page-con">
+            {children}
+          </div>
           <ReleaseTypeComponent />
           <Footer />
         </Provider>
