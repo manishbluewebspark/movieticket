@@ -2,7 +2,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.css";
-import { useEffect , Suspense } from "react";
+import { useEffect, Suspense } from "react";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import Navbar from "./Components/Header/Navbar";
@@ -26,19 +26,17 @@ export default function RootLayout({ children }) {
   }, []);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Provider store={store}>
-          <Navbar />
-          <div className="home-page-con">
-            {children}
-          </div>
-          <ReleaseTypeComponent />
-          <Footer />
-        </Provider>
-      </body>
+      <Suspense fallback={<div>Loading...</div>}>
+        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+          <Provider store={store}>
+            <Navbar />
+            <div className="home-page-con">{children}</div>
+            <ReleaseTypeComponent />
+            <Footer />
+          </Provider>
+        </body>
+      </Suspense>
     </html>
-    </Suspense>
   );
 }
