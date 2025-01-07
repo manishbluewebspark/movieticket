@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect} from "react";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import CinemaMap from "../Components/CinemaMap/CinemaMap";
@@ -108,7 +108,7 @@ const CinemaBooking = () => {
   }, []);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <>
       {isClient && (
         <div className="container mb-4">
           <div className="cn-movie-title-section text-center mb-4">
@@ -230,7 +230,7 @@ const CinemaBooking = () => {
           </div>
         </div>
       )}
-    </Suspense>
+    </>
   );
 };
 
