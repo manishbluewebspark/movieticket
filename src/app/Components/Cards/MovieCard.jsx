@@ -19,9 +19,10 @@ const MovieCard = ({
 
   const handleBookNow = () => {
     // Use the navigate method provided by next/navigation
-    movieid
+    movieid,
+    moviename 
      router.push(
-      `/cinemabooking?movieid=${encodeURIComponent(movieid)}`
+      `/cinemabooking?movieid=${encodeURIComponent(movieid)}&moviename=${encodeURIComponent(moviename)}`
     );
     // router.push(
     //   `/cinemabooking?moviename=${encodeURIComponent(moviename)}&rating=${encodeURIComponent(

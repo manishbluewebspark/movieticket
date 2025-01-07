@@ -1092,6 +1092,10 @@ padding: 8px;
   padding: 0px 20px;
   border-radius: 10px;
 }
+.cn-theater-con{
+  height: 650px;
+  overflow-y: scroll;
+}
 
 /* Search Bar */
 .cn-search-bar {
@@ -1206,7 +1210,7 @@ padding: 8px;
 }
 
 .cn-book-btn:hover {
-  background-color: #0033cc;
+  /* background-color: #0033cc; */
 }
 .home-page-con{
   margin-top: 110px ;
@@ -1290,5 +1294,73 @@ padding: 8px;
 }
 
 
+/* iiiiiiiiiiiiiiiiiiiiii */
+.cn-cinema-card,
+.cn-date-btn,
+.cn-time-btn {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
 
+.cn-cinema-card.selected,
+.cn-date-btn.selected,
+.cn-time-btn.selected {
+  border: 2px solid #008ECC;
+}
+
+.cn-search-bar {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.cn-book-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cn-book-btn:hover {
+  /* background-color: #0056b3; */
+}
+
+.cn-booking-btn {
+  background-color: #f02f2f; /* Green background */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 12px 15px; /* Padding inside the button */
+  font-size: 16px; /* Text size */
+  cursor: pointer; /* Cursor changes to pointer */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  margin: 10px 5px; /* Margin above and below the button */
+  /* width: 100%;  */
+}
+
+.cn-booking-btn:hover {
+  background-color: #9e2c2c; /* Darker green on hover */
+  transform: translateY(-2px); /* Slight move up on hover */
+}
+
+.cn-booking-btn:active {
+  transform: translateY(2px); /* Move down when button is clicked */
+}
+
+.cn-booking-btn:focus {
+  outline: none; /* Remove outline on focus */
+}
+
+/* Add this for the selected button */
+.cn-booking-btn.selected {
+  border: 2px solid #008ECC; /* Red border when selected */
+}
 
