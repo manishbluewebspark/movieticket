@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import CinemaMap from "../../Components/CinemaMap/CinemaMap";
-
+import axios from "axios";
 const CinemaBooking = () => {
   const searchParams = useSearchParams();
   const movieTitle = searchParams.get("moviename");
@@ -18,6 +18,10 @@ const CinemaBooking = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBookingLink, setSelectedBookingLink] = useState(null);
   const [isClient, setIsClient] = useState(false); // Flag to track if on client side
+  const [moviesData, setMoviesData] = useState();
+  const [moviesTimeData, setMoviesTimeData] = useState();
+  const [moviesShowsData, setMoviesShowsData] = useState();
+  const [bookingSitesData, setBookingSitesData] = useState();
 
   const cinemaId = selectedCinema?.cinemaid;
 
@@ -48,9 +52,11 @@ const CinemaBooking = () => {
         ? 0
         : parseInt(hour);
 
-    const start = to24Hour(startHour, startPeriod) * 60 + parseInt(startMinutes);
+    const start =
+      to24Hour(startHour, startPeriod) * 60 + parseInt(startMinutes);
     const end = to24Hour(endHour, endPeriod) * 60 + parseInt(endMinutes);
-    const currentTime = to24Hour(timeHour, timePeriod) * 60 + parseInt(timeMinutes);
+    const currentTime =
+      to24Hour(timeHour, timePeriod) * 60 + parseInt(timeMinutes);
 
     if (end > start) {
       return currentTime >= start && currentTime <= end;
@@ -60,33 +66,44 @@ const CinemaBooking = () => {
   };
 
   const handleCinemaSelection = (cinema) => {
-    if (selectedCinema?.cinemaname !== cinema.cinemaname) {
-      setSelectedCinema(cinema);
-    }
+    // if (selectedCinema?.cinemaname !== cinema.cinemaname) {
+    setSelectedCinema(cinema);
+    setMoviesTimeData("");
+    setSelectedDate("");
+    setSelectedRange("");
+    setMoviesShowsData("");
+    // }
   };
 
-  const handleDateSelection = (date) => {
+  const handleDateSelection = (date, theatre) => {
+    setMoviesTimeData(theatre[date]);
     setSelectedDate(date);
+    setSelectedRange("");
+    setMoviesShowsData("");
   };
 
-  const handleRangeSelection = (range) => {
+  const handleRangeSelection = (range, moviesTimeData) => {
     setSelectedRange(range);
+    setMoviesShowsData(moviesTimeData[range]);
 
-    const times = Object.keys(
-      bookingStatus?.ticketMapping?.[movieId]?.[cinemaId]?.[selectedDate] || {}
-    );
-    const matchingTime = times.find((time) => isTimeInRange(time, timeRangeBoundaries[range]));
+    // const times = Object.keys(
+    //   bookingStatus?.ticketMapping?.[movieId]?.[cinemaId]?.[selectedDate] || {}
+    // );
+    // const matchingTime = times.find((time) =>
+    //   isTimeInRange(time, timeRangeBoundaries[range])
+    // );
 
-    if (matchingTime) {
-      setSelectedTime(matchingTime);
-    } else {
-      setSelectedTime(null);
-      alert("No times available for the selected range.");
-    }
+    // if (matchingTime) {
+    //   setSelectedTime(matchingTime);
+    // } else {
+    //   setSelectedTime(null);
+    //   alert("No times available for the selected range.");
+    // }
   };
 
   const handleBookingLinkSelection = (link) => {
-    setSelectedBookingLink(link);
+    // setSelectedBookingLink(link);
+    window.open(link, "_blank");
   };
 
   // This effect will run once when the component mounts on the client side
@@ -95,8 +112,15 @@ const CinemaBooking = () => {
   }, []);
 
   const handleBooking = () => {
-    if (!selectedCinema || !selectedDate || !selectedTime || !selectedBookingLink) {
-      alert("Please select a cinema, date, time, and booking link to proceed with booking.");
+    if (
+      !selectedCinema ||
+      !selectedDate ||
+      !selectedTime ||
+      !selectedBookingLink
+    ) {
+      alert(
+        "Please select a cinema, date, time, and booking link to proceed with booking."
+      );
       return;
     }
 
@@ -106,6 +130,51 @@ const CinemaBooking = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/bookingsites`
+        );
+        setBookingSitesData(response.data); // Set booking sites data from API
+      } catch (error) {
+        console.error("Failed to fetch booking sites:", error.message);
+      }
+    };
+    if (bookingStatus?.ticketMapping?.[movieId]) {
+      setMoviesData(bookingStatus?.ticketMapping?.[movieId]);
+      fetchData();
+    }
+  }, [bookingStatus]);
+  // console.log("ppppppppppppppp",bookingStatus?.ticketMapping?.[movieId]);
+  // for (const theatreId in moviesData) {
+  //   const theatre = moviesData[theatreId];
+  //   for (const date in theatre) {
+  //     const times = theatre[date];
+  //     for (const time in times) {
+  //       const shows = times[time];
+  //       for (const showId in shows) {
+  //         const show = shows[showId];
+  //         console.log(`Date: ${date}, Time: ${time}, Show ID: ${showId}`);
+  //         console.log(`Booking Link: ${show.bookinglink}`);
+  //         console.log('Seats:');
+  //         show.seats.forEach((seat) => {
+  //           console.log(`  Type: ${seat.type}, Price: ${seat.price}, Availability: ${seat.availability}`);
+  //         });
+  //       }
+  //     }
+  //   }
+  // }
+  const getTheatreName = (theatreId) => {
+    const result = bookingStatus?.cinemaInfo?.find(
+      (item) => item.cinemaid == theatreId
+    );
+    return result;
+  };
+  const getSiteDetails = (showId) => {
+    const result = bookingSitesData?.find((item) => item.websiteid == showId);
+    return result;
+  };
   return (
     <>
       {isClient && (
@@ -133,6 +202,131 @@ const CinemaBooking = () => {
                 />
               </div>
               <div className="cn-theater-con">
+                {Object.keys(moviesData || {}).map((theatreId) => {
+                  const theatreName = getTheatreName(theatreId);
+                  const theatre = moviesData[theatreId];
+                  return (
+                    <div
+                      className={`cn-cinema-card ${
+                        selectedCinema === theatreId ? "selected" : ""
+                      }`}
+                      key={theatreId}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCinemaSelection(theatreId);
+                      }}
+                    >
+                      <h4>{theatreName?.cinemaname}</h4>
+                      {selectedCinema === theatreId && (
+                        <>
+                          <div
+                            className="cn-date-section"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            {Object.keys(theatre).map((date, i) => {
+                              return (
+                                <button
+                                  className={`cn-date-btn ${
+                                    selectedDate === date ? "selected" : ""
+                                  }`}
+                                  key={i}
+                                  onClick={() =>
+                                    handleDateSelection(date, theatre)
+                                  }
+                                >
+                                  {date}
+                                </button>
+                              );
+                            })}
+                          </div>
+                          {moviesTimeData && (
+                            <>
+                              <div
+                                className="cn-time-section"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                {Object.keys(moviesTimeData).map((time, j) => {
+                                  return (
+                                    <button
+                                      key={j}
+                                      className={`cn-time-btn ${
+                                        selectedRange === time ? "selected" : ""
+                                      }`}
+                                      onClick={() => {
+                                        // handleCinemaSelection(cinema);
+                                        handleRangeSelection(
+                                          time,
+                                          moviesTimeData
+                                        );
+                                      }}
+                                    >
+                                      {time}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                              {moviesShowsData && (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                  }}
+                                >
+                                  {Object.keys(moviesShowsData).map(
+                                    (showId) => {
+                                      const show = moviesShowsData[showId];
+                                      const siteDatails =
+                                        getSiteDetails(showId);
+                                      // console.log(show, "show");
+
+                                      return (
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                          }}
+                                          key={showId}
+                                        >
+                                          <button
+                                            key={showId}
+                                            className={`cn-booking-btn ${
+                                              selectedBookingLink === showId
+                                                ? "selected"
+                                                : ""
+                                            }`}
+                                            // onClick={() =>
+                                            //   handleBookingLinkSelection(
+                                            //     show?.bookinglink
+                                            //   )
+                                            // }
+                                          >
+                                            {siteDatails?.websitename}
+                                          </button>
+                                          <button
+                                            className={`cn-time-btn `}
+                                            onClick={() =>
+                                              handleBookingLinkSelection(
+                                                show?.bookinglink
+                                              )
+                                            }
+                                          >
+                                            Avalable
+                                          </button>
+                                        </div>
+                                      );
+                                    }
+                                  )}
+                                </div>
+                              )}
+                            </>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+              {/* <div className="cn-theater-con">
                 {bookingStatus &&
                   bookingStatus.cinemaInfo
                     ?.filter((cinema) =>
@@ -164,7 +358,7 @@ const CinemaBooking = () => {
                           ))}
                         </div>
 
-                        {/* Time Range Buttons Inside the Card */}
+                       
                         <div className="cn-time-section" onClick={(e) => e.stopPropagation()}>
                           {Object.keys(timeRangeBoundaries).map((range) => (
                             <button
@@ -180,7 +374,7 @@ const CinemaBooking = () => {
                           ))}
                         </div>
 
-                        {/* Booking Links and Confirmation */}
+                       
                         {selectedCinema?.cinemaname === cinema.cinemaname &&
                           selectedDate &&
                           selectedTime && (
@@ -218,7 +412,7 @@ const CinemaBooking = () => {
                           )}
                       </div>
                     ))}
-              </div>
+              </div> */}
 
               <div className="confirm-btn-con mt-4">
                 <button className="cn-book-btn" onClick={handleBooking}>
