@@ -83,7 +83,7 @@ a {
   position: absolute;
   transform: translate(-50%, -50%);
   left: 50%;
-  top: 105%;
+  top: 110%;
   z-index: 999;
 
 }
@@ -990,6 +990,9 @@ padding: 8px;
 
 /* responsive css start */
 @media (min-width:320px) and (max-width:575px) {
+  .tab-button{
+    padding: 8px !important;
+  }
   .nav-logo img{
     width: 80px !important;
   }
@@ -1005,7 +1008,19 @@ padding: 8px;
 .footer-social a{
   border: none !important;
 }
-
+.map-container{
+  height: 400px !important;
+  width: 100%;
+}
+.cn-map-section {
+  
+  height: 400px !important;
+  margin-bottom: 20px;
+}
+.cn-theater-con{
+  height: 350px !important;
+  overflow-y: scroll;
+}
 /* .date-picker{
   justify-content: center;
 }
@@ -1021,10 +1036,10 @@ padding: 8px;
     padding-top: 20px;
 }
 .quick-filters-con{
- top: 130%;
+ top: 145%;
 }
 .home-page-con{
-  margin-top: 200px !important;
+  margin-top: 220px !important;
 }
 
 
@@ -1034,6 +1049,21 @@ padding: 8px;
 .type-picker{
   justify-content: center;
 } */
+}
+@media (min-width:992px) and (max-width:2500px) {
+  .nav-logo img{
+    width: 80px !important;
+  }
+  .navbar-con {
+    padding-top: 20px;
+}
+.quick-filters-con{
+ top: 110%;
+}
+.home-page-con{
+  margin-top: 100px !important;
+}
+
 }
 @media (min-width:768px) and (max-width:991px) {
   .show-type-col{
@@ -1059,6 +1089,7 @@ padding: 8px;
     flex-direction: column;
   }
 }
+
 /* responsive css end   */
 /* cinemabooking css start */
 /* General Container */
@@ -1071,7 +1102,7 @@ padding: 8px;
 .cn-map-section {
   flex: 1;
   min-width: 50%;
-  height: 500px;
+  height: 715px;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -1088,7 +1119,7 @@ padding: 8px;
 /* Sidebar Section */
 .cn-sidebar-section {
   flex: 1 1;
-  min-width: 400px;
+  /* min-width: 320px; */
   padding: 0px 20px;
   border-radius: 10px;
 }
@@ -1213,7 +1244,7 @@ padding: 8px;
   /* background-color: #0033cc; */
 }
 .home-page-con{
-  margin-top: 110px ;
+  margin-top: 100px ;
 }
 
 /* cinemabooking css end  */
@@ -1312,6 +1343,13 @@ padding: 8px;
   border: 2px solid #008ECC;
 }
 
+.cn-date-btn.selected,
+.cn-time-btn.selected {
+  border: 2px solid #008ECC;
+  background-color: #008ECC;
+  color: white;
+}
+
 .cn-search-bar {
   width: 100%;
   padding: 10px;
@@ -1334,21 +1372,17 @@ padding: 8px;
 }
 
 .cn-booking-btn {
-  background-color: #f02f2f; /* Green background */
-  color: white; /* White text */
+  background-color: transparent; 
+  color: #008ecc; /* White text */
   border: none; /* No border */
   border-radius: 5px; /* Rounded corners */
-  padding: 12px 15px; /* Padding inside the button */
-  font-size: 16px; /* Text size */
-  cursor: pointer; /* Cursor changes to pointer */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
-  margin: 10px 5px; /* Margin above and below the button */
-  /* width: 100%;  */
+  width: 80px;
+  cursor: none !important;
 }
 
 .cn-booking-btn:hover {
-  background-color: #9e2c2c; /* Darker green on hover */
-  transform: translateY(-2px); /* Slight move up on hover */
+  /* background-color: #9e2c2c;  */
+  /* transform: translateY(-2px); */
 }
 
 .cn-booking-btn:active {
@@ -1364,3 +1398,40 @@ padding: 8px;
   border: 2px solid #008ECC; /* Red border when selected */
 }
 
+/* tabs section css */
+.movies-tab-navigation {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background: #f8f8f8;
+  border-bottom: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #D6E1F7;
+}
+
+.tab-container {
+  display: flex;
+  gap: 10px;
+}
+
+.tab-button {
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
+  background: white;
+  font-weight: bold;
+  color: black;
+}
+
+.tab-button.active {
+  border-bottom: 3px solid #008ECC;
+  color: #008ECC;
+}
+.nav-logo{
+  cursor: pointer;
+}
+
+.map-container{
+  height: 715px;
+  width: 100%;
+}

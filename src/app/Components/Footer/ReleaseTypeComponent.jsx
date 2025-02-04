@@ -36,8 +36,8 @@ const ReleaseTypeComponent = () => {
   return (
     <div className="release-type-container">
       <div className="container">
-        <h2>Release Type</h2>
-        <div className="tabs">
+        <h2>Top Trending Movies</h2>
+        {/* <div className="tabs">
           <button
             className={`tab-button ${activeTab === "upcoming" ? "active" : ""}`}
             onClick={() => {
@@ -58,7 +58,7 @@ const ReleaseTypeComponent = () => {
           >
             Re-release
           </button>
-        </div>
+        </div> */}
 
         <div className="movie-cards-container">
           {moviesToDisplay?.length > 0 ? (

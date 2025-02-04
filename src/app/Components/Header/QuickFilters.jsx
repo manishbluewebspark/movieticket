@@ -291,6 +291,7 @@ const QuickFilters = () => {
             </div>
             <select
   className="form-select qf-selec-lang"
+  style={{width:'117px !important'}}
   value={filters.langs[0] || ""}
   onChange={(e) =>
     setFilters((prev) => ({
@@ -299,7 +300,7 @@ const QuickFilters = () => {
     }))
   }
 >
-  <option value="">Select</option>
+  <option value="">Select to All</option>
   <option value="English">English</option>
   <option value="Hindi">Hindi</option>
   <option value="Malayalam">Malayalam</option>

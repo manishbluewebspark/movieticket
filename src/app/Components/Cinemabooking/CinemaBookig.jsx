@@ -22,6 +22,8 @@ const CinemaBooking = () => {
   const [moviesTimeData, setMoviesTimeData] = useState();
   const [moviesShowsData, setMoviesShowsData] = useState();
   const [bookingSitesData, setBookingSitesData] = useState();
+  console.log('ee', moviesShowsData);
+
 
   const cinemaId = selectedCinema?.cinemaid;
 
@@ -49,8 +51,8 @@ const CinemaBooking = () => {
       period === "PM" && hour !== 12
         ? parseInt(hour) + 12
         : period === "AM" && hour === 12
-        ? 0
-        : parseInt(hour);
+          ? 0
+          : parseInt(hour);
 
     const start =
       to24Hour(startHour, startPeriod) * 60 + parseInt(startMinutes);
@@ -165,12 +167,21 @@ const CinemaBooking = () => {
   //     }
   //   }
   // }
+  let theatreArray = [];  // Declare an array to store the results
+
   const getTheatreName = (theatreId) => {
     const result = bookingStatus?.cinemaInfo?.find(
       (item) => item.cinemaid == theatreId
     );
+    console.log("maps", result);
+
+    if (result) {
+      theatreArray.push(result);  // Push the result into the array if it's found
+    }
     return result;
   };
+
+  console.log("getTheatreName", getTheatreName);
   const getSiteDetails = (showId) => {
     const result = bookingSitesData?.find((item) => item.websiteid == showId);
     return result;
@@ -182,16 +193,16 @@ const CinemaBooking = () => {
           <div className="cn-movie-title-section text-center mb-4">
             <h1>{movieTitle}</h1>
           </div>
-          <div className="cn-cinema-booking-container">
-            <div className="cn-map-section">
+          <div className="cn-cinema-booking-container row">
+            <div className="cn-map-section col-lg-6 col-md-6 col-12">
               {bookingStatus?.cinemaInfo ? (
-                <CinemaMap cinemas={bookingStatus.cinemaInfo} />
+                <CinemaMap cinemas={theatreArray} />
               ) : (
                 <p>Loading cinemas...</p>
               )}
             </div>
 
-            <div className="cn-sidebar-section">
+            <div className="cn-sidebar-section col-lg-6 col-md-6 col-12">
               <div>
                 <input
                   type="text"
@@ -207,9 +218,8 @@ const CinemaBooking = () => {
                   const theatre = moviesData[theatreId];
                   return (
                     <div
-                      className={`cn-cinema-card ${
-                        selectedCinema === theatreId ? "selected" : ""
-                      }`}
+                      className={`cn-cinema-card ${selectedCinema === theatreId ? "selected" : ""
+                        }`}
                       key={theatreId}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -226,9 +236,8 @@ const CinemaBooking = () => {
                             {Object.keys(theatre).map((date, i) => {
                               return (
                                 <button
-                                  className={`cn-date-btn ${
-                                    selectedDate === date ? "selected" : ""
-                                  }`}
+                                  className={`cn-date-btn ${selectedDate === date ? "selected" : ""
+                                    }`}
                                   key={i}
                                   onClick={() =>
                                     handleDateSelection(date, theatre)
@@ -249,9 +258,8 @@ const CinemaBooking = () => {
                                   return (
                                     <button
                                       key={j}
-                                      className={`cn-time-btn ${
-                                        selectedRange === time ? "selected" : ""
-                                      }`}
+                                      className={`cn-time-btn ${selectedRange === time ? "selected" : ""
+                                        }`}
                                       onClick={() => {
                                         // handleCinemaSelection(cinema);
                                         handleRangeSelection(
@@ -277,8 +285,6 @@ const CinemaBooking = () => {
                                       const show = moviesShowsData[showId];
                                       const siteDatails =
                                         getSiteDetails(showId);
-                                      // console.log(show, "show");
-
                                       return (
                                         <div
                                           style={{
@@ -287,7 +293,7 @@ const CinemaBooking = () => {
                                           }}
                                           key={showId}
                                         >
-                                          <button
+                                          {/* <button
                                             key={showId}
                                             className={`cn-booking-btn ${
                                               selectedBookingLink === showId
@@ -301,7 +307,21 @@ const CinemaBooking = () => {
                                             // }
                                           >
                                             {siteDatails?.websitename}
+                                            <Images></Images>
+                                          </button> */}
+                                          <button
+                                            key={showId}
+                                            className={`cn-booking-btn mb-2 d-flex flex-column align-items-center justify-center ${selectedBookingLink === showId ? "selected" : ""
+                                              }`}
+                                          >
+                                            <img
+                                              src={`data:image/png;base64,${siteDatails?.logo}`}
+                                              alt="Booking Icon"
+                                              style={{ width: "78px", borderRadius: '10px' }}
+                                            />
+                                            <span style={{ fontSize: '12px' }}> {siteDatails?.websitename}</span>
                                           </button>
+{/* boook button start */}
                                           <button
                                             className={`cn-time-btn `}
                                             onClick={() =>
@@ -310,8 +330,9 @@ const CinemaBooking = () => {
                                               )
                                             }
                                           >
-                                            Avalable
+                                            available
                                           </button>
+                        {/* book button end  */}
                                         </div>
                                       );
                                     }
@@ -375,7 +396,7 @@ const CinemaBooking = () => {
                         </div>
 
                        
-                        {selectedCinema?.cinemaname === cinema.cinemaname &&
+                        { selectedCinema?.cinemaname === cinema.cinemaname &&
                           selectedDate &&
                           selectedTime && (
                             <div>
@@ -414,11 +435,11 @@ const CinemaBooking = () => {
                     ))}
               </div> */}
 
-              <div className="confirm-btn-con mt-4">
+              {/* <div className="confirm-btn-con mt-4">
                 <button className="cn-book-btn" onClick={handleBooking}>
                   Book
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

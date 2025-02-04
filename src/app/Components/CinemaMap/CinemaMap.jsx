@@ -16,7 +16,7 @@ const CinemaMap = ({ cinemas }) => {
   const defaultPosition = [12.9716, 77.5946]; // Default to Bengaluru
 
   return (
-    <MapContainer center={defaultPosition} zoom={12} style={{ height: "500px", width: "100%" }}>
+    <MapContainer className="map-container" center={defaultPosition} zoom={12} >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

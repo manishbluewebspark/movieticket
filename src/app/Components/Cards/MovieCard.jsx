@@ -20,9 +20,9 @@ const MovieCard = ({
   const handleBookNow = () => {
     // Use the navigate method provided by next/navigation
     movieid,
-    moviename 
+    moviename_release_lang 
      router.push(
-      `/cinemabooking?movieid=${encodeURIComponent(movieid)}&moviename=${encodeURIComponent(moviename)}`
+      `/cinemabooking?movieid=${encodeURIComponent(movieid)}&moviename=${encodeURIComponent(moviename_release_lang)}`
     );
     // router.push(
     //   `/cinemabooking?moviename=${encodeURIComponent(moviename)}&rating=${encodeURIComponent(
@@ -55,11 +55,13 @@ const MovieCard = ({
       <div className="p-3 text-center">
         <div className="mvc-title-container" title={moviename}>
           <h5 className="mvc-title mb-1">
-            <span>
-              {languages.length > 1
-                ? moviename
-                : `${moviename_release_lang} (${moviename})`}
-            </span>
+          <span>
+  {languages?.length > 1
+    ? moviename
+    : moviename_release_lang === moviename
+    ? moviename
+    : `${moviename_release_lang} (${moviename})`}
+</span>
           </h5>
         </div>
         <p className="mvc-genre text-muted mb-2">

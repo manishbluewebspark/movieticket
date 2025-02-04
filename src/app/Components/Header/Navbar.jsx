@@ -7,8 +7,11 @@ import { fetchCities } from "../../store/features/citySlice";
 import { fetchMoviesInCity } from "../../store/features/movieSlice";
 import { setSelectedCity } from "../../store/features/citySlice"; // Import the action
 import QuickFilters from "./QuickFilters";
+import { useRouter } from "next/navigation";
+
 
 const Navbar= () => {
+      const router = useRouter();
 
       const dispatch = useDispatch();
       const { cities, selectedCity } = useSelector((state) => state.city); // Get selectedCity from Redux
@@ -33,6 +36,10 @@ const Navbar= () => {
           dispatch(fetchMoviesInCity(cityId)); // Fetch movies when city changes
         }
       };
+
+      const handleBack = () => {
+        router.back(); // Navigates back in the browser history
+      };
     
   return (
    <>
@@ -40,10 +47,24 @@ const Navbar= () => {
    <div className="navbar-sec">
      <div className="container navbar-con">
         <div className="row">
+        <span
+      onClick={handleBack}
+      style={{
+        cursor: 'pointer',
+        display: 'inline-flex',
+        alignItems: 'center',
+        userSelect: 'none',
+      }}
+    >
+      <i className="bi bi-arrow-left" style={{ marginRight: '0.5rem' }}></i>
+      Back
+    </span>
+        </div>
+        <div className="row">
             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6 d-flex align-items-center">
-                <div className="nav-logo">
-                    <Image src={logo} alt="logo" height={32.17} width={130}></Image>
-                </div>
+            <div className="nav-logo" onClick={() => (window.location.href = "/")}>
+                <Image src={logo} alt="logo" height={32.17} width={130} />
+            </div>
             </div>
             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6 d-flex align-items-center justify-content-end">
                <div className="navbar-right-con">

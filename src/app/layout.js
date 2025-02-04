@@ -27,6 +27,10 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <head>
+      <link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+
+      </head>
       <Suspense fallback={<div>Loading...</div>}>
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
           <Provider store={store}>
