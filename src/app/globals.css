@@ -1159,6 +1159,8 @@ padding: 8px;
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
+  overflow-x: scroll;
+  
 }
 
 .cn-date-btn {
@@ -1181,7 +1183,13 @@ padding: 8px;
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
+  overflow-x:  scroll;
+  
 }
+::-webkit-scrollbar {
+  display: none;
+}
+
 
 .cn-time-btn {
   background-color: #f8f9fa;

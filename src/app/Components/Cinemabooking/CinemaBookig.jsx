@@ -22,7 +22,6 @@ const CinemaBooking = () => {
   const [moviesTimeData, setMoviesTimeData] = useState();
   const [moviesShowsData, setMoviesShowsData] = useState();
   const [bookingSitesData, setBookingSitesData] = useState();
-  console.log('ee', moviesShowsData);
 
 
   const cinemaId = selectedCinema?.cinemaid;
@@ -173,7 +172,6 @@ const CinemaBooking = () => {
     const result = bookingStatus?.cinemaInfo?.find(
       (item) => item.cinemaid == theatreId
     );
-    console.log("maps", result);
 
     if (result) {
       theatreArray.push(result);  // Push the result into the array if it's found
@@ -181,7 +179,6 @@ const CinemaBooking = () => {
     return result;
   };
 
-  console.log("getTheatreName", getTheatreName);
   const getSiteDetails = (showId) => {
     const result = bookingSitesData?.find((item) => item.websiteid == showId);
     return result;
@@ -309,18 +306,23 @@ const CinemaBooking = () => {
                                             {siteDatails?.websitename}
                                             <Images></Images>
                                           </button> */}
-                                          <button
-                                            key={showId}
-                                            className={`cn-booking-btn mb-2 d-flex flex-column align-items-center justify-center ${selectedBookingLink === showId ? "selected" : ""
-                                              }`}
-                                          >
-                                            <img
-                                              src={`data:image/png;base64,${siteDatails?.logo}`}
-                                              alt="Booking Icon"
-                                              style={{ width: "78px", borderRadius: '10px' }}
-                                            />
-                                            <span style={{ fontSize: '12px' }}> {siteDatails?.websitename}</span>
-                                          </button>
+                                         <button
+  key={showId}
+  className={`cn-booking-btn mb-2 d-flex flex-column align-items-center justify-center ${selectedBookingLink === showId ? "selected" : ""}`}
+>
+  <img
+    src={`data:image/png;base64,${siteDatails?.logo}`}
+    alt="Booking Icon"
+    style={{
+      width: "78px",       // fixed width
+      height: "78px",      // fixed height
+      objectFit: "contain", // or "cover" depending on your preference
+      borderRadius: "10px"
+    }}
+  />
+  <span style={{ fontSize: '12px' }}>{siteDatails?.websitename}</span>
+</button>
+
 {/* boook button start */}
                                           <button
                                             className={`cn-time-btn `}
