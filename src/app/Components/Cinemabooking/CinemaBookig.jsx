@@ -23,7 +23,6 @@ const CinemaBooking = () => {
   const [moviesShowsData, setMoviesShowsData] = useState();
   const [bookingSitesData, setBookingSitesData] = useState();
 
-
   const cinemaId = selectedCinema?.cinemaid;
 
   // Time range boundaries
@@ -50,8 +49,8 @@ const CinemaBooking = () => {
       period === "PM" && hour !== 12
         ? parseInt(hour) + 12
         : period === "AM" && hour === 12
-          ? 0
-          : parseInt(hour);
+        ? 0
+        : parseInt(hour);
 
     const start =
       to24Hour(startHour, startPeriod) * 60 + parseInt(startMinutes);
@@ -147,26 +146,8 @@ const CinemaBooking = () => {
       fetchData();
     }
   }, [bookingStatus]);
-  // console.log("ppppppppppppppp",bookingStatus?.ticketMapping?.[movieId]);
-  // for (const theatreId in moviesData) {
-  //   const theatre = moviesData[theatreId];
-  //   for (const date in theatre) {
-  //     const times = theatre[date];
-  //     for (const time in times) {
-  //       const shows = times[time];
-  //       for (const showId in shows) {
-  //         const show = shows[showId];
-  //         console.log(`Date: ${date}, Time: ${time}, Show ID: ${showId}`);
-  //         console.log(`Booking Link: ${show.bookinglink}`);
-  //         console.log('Seats:');
-  //         show.seats.forEach((seat) => {
-  //           console.log(`  Type: ${seat.type}, Price: ${seat.price}, Availability: ${seat.availability}`);
-  //         });
-  //       }
-  //     }
-  //   }
-  // }
-  let theatreArray = [];  // Declare an array to store the results
+
+  let theatreArray = []; // Declare an array to store the results
 
   const getTheatreName = (theatreId) => {
     const result = bookingStatus?.cinemaInfo?.find(
@@ -174,7 +155,7 @@ const CinemaBooking = () => {
     );
 
     if (result) {
-      theatreArray.push(result);  // Push the result into the array if it's found
+      theatreArray.push(result); // Push the result into the array if it's found
     }
     return result;
   };
@@ -215,8 +196,9 @@ const CinemaBooking = () => {
                   const theatre = moviesData[theatreId];
                   return (
                     <div
-                      className={`cn-cinema-card ${selectedCinema === theatreId ? "selected" : ""
-                        }`}
+                      className={`cn-cinema-card ${
+                        selectedCinema === theatreId ? "selected" : ""
+                      }`}
                       key={theatreId}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -233,8 +215,9 @@ const CinemaBooking = () => {
                             {Object.keys(theatre).map((date, i) => {
                               return (
                                 <button
-                                  className={`cn-date-btn ${selectedDate === date ? "selected" : ""
-                                    }`}
+                                  className={`cn-date-btn ${
+                                    selectedDate === date ? "selected" : ""
+                                  }`}
                                   key={i}
                                   onClick={() =>
                                     handleDateSelection(date, theatre)
@@ -255,8 +238,9 @@ const CinemaBooking = () => {
                                   return (
                                     <button
                                       key={j}
-                                      className={`cn-time-btn ${selectedRange === time ? "selected" : ""
-                                        }`}
+                                      className={`cn-time-btn ${
+                                        selectedRange === time ? "selected" : ""
+                                      }`}
                                       onClick={() => {
                                         // handleCinemaSelection(cinema);
                                         handleRangeSelection(
@@ -272,14 +256,16 @@ const CinemaBooking = () => {
                               </div>
                               {moviesShowsData && (
                                 <div
-                                  style={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                  }}
+                                // style={{
+                                //   display: "flex",
+                                //   flexDirection: "row",
+                                // }}
                                 >
                                   {Object.keys(moviesShowsData).map(
                                     (showId) => {
                                       const show = moviesShowsData[showId];
+                                      console.log("show=========", show);
+
                                       const siteDatails =
                                         getSiteDetails(showId);
                                       return (
@@ -306,25 +292,62 @@ const CinemaBooking = () => {
                                             {siteDatails?.websitename}
                                             <Images></Images>
                                           </button> */}
-                                         <button
-  key={showId}
-  className={`cn-booking-btn mb-2 d-flex flex-column align-items-center justify-center ${selectedBookingLink === showId ? "selected" : ""}`}
->
-  <img
-    src={`data:image/png;base64,${siteDatails?.logo}`}
-    alt="Booking Icon"
-    style={{
-      width: "78px",       // fixed width
-      height: "78px",      // fixed height
-      objectFit: "contain", // or "cover" depending on your preference
-      borderRadius: "10px"
-    }}
-  />
-  <span style={{ fontSize: '12px' }}>{siteDatails?.websitename}</span>
-</button>
-
-{/* boook button start */}
+                                          <div style={{ display: "flex" }}>
+                                            {show?.seats?.map((item, index) => (
+                                              <div
+                                                className={`cn-info-div`}
+                                                // onClick={() =>
+                                                //   handleBookingLinkSelection(
+                                                //     show?.bookinglink
+                                                //   )
+                                                // }
+                                                style={{
+                                                  textAlign: "center",
+                                                  margin: "5px",
+                                                }}
+                                              >
+                                                <p className="m-0">
+                                                  {item?.price}
+                                                </p>
+                                                <p className="m-0">
+                                                  {item?.type}
+                                                </p>
+                                                <p className="m-0">
+                                                  Seat: {item?.availability}
+                                                </p>
+                                              </div>
+                                            ))}
+                                          </div>
                                           <button
+                                            key={showId}
+                                            className={`cn-booking-btn mb-2 d-flex flex-column align-items-center justify-center ${
+                                              selectedBookingLink === showId
+                                                ? "selected"
+                                                : ""
+                                            }`}
+                                            onClick={() =>
+                                              handleBookingLinkSelection(
+                                                show?.bookinglink
+                                              )
+                                            }
+                                          >
+                                            <img
+                                              src={`data:image/png;base64,${siteDatails?.logo}`}
+                                              alt="Booking Icon"
+                                              style={{
+                                                width: "78px", // fixed width
+                                                height: "78px", // fixed height
+                                                objectFit: "contain", // or "cover" depending on your preference
+                                                borderRadius: "10px",
+                                              }}
+                                            />
+                                            <span style={{ fontSize: "12px" }}>
+                                              {siteDatails?.websitename}
+                                            </span>
+                                          </button>
+
+                                          {/* boook button start */}
+                                          {/* <button
                                             className={`cn-time-btn `}
                                             onClick={() =>
                                               handleBookingLinkSelection(
@@ -333,8 +356,9 @@ const CinemaBooking = () => {
                                             }
                                           >
                                             available
-                                          </button>
-                        {/* book button end  */}
+                                          </button> */}
+                                          {/* book button end  */}
+                                          <hr />
                                         </div>
                                       );
                                     }
