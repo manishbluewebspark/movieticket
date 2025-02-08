@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import logo from "../../images/Hawlkwhite.svg";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCities } from "../../store/features/citySlice";
 import { fetchMoviesInCity } from "../../store/features/movieSlice";
@@ -96,8 +96,9 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-
-        <QuickFilters></QuickFilters>
+        <Suspense fallback={<div>Loading...</div>}>
+          <QuickFilters></QuickFilters>
+        </Suspense>
       </div>
     </>
   );
